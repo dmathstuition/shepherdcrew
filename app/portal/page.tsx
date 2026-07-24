@@ -24,14 +24,16 @@ export default async function PortalPage() {
     <main className="flex min-h-screen items-center justify-center px-6 py-24">
       <div className="w-full max-w-md">
         <div className="text-center">
-          <Image
-            src="/logo-shepherds-crew.png"
-            alt=""
-            width={64}
-            height={64}
-            className="mx-auto h-16 w-16 object-contain"
-          />
-          <h1 className="mt-8 font-display text-4xl leading-none">CLASS PORTAL</h1>
+          <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+            <Image
+              src="/logo-shepherds-crew.png"
+              alt="The Shepherd's Crew"
+              width={64}
+              height={64}
+              className="h-[86%] w-[86%] object-contain"
+            />
+          </span>
+          <h1 className="mt-8 font-display text-4xl font-semibold leading-none">Class Portal</h1>
           <p className="mt-4 text-white/60">
             Enter your name and the access code your coordinator gave you. No password to remember.
           </p>

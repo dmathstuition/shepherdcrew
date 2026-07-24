@@ -27,11 +27,24 @@ the admin surface is the remaining piece (see "Admin surface" below).
   service-role only). Demo data in `supabase/seed.sql`; a demo member/access
   code via `node scripts/seed-portal-demo.mjs`.
 
-## Still to build
+## Admin surface (now built)
 
-- Admin authentication (email + password + TOTP) and the admin surface below.
-- Until the admin UI exists, create members with `scripts/seed-portal-demo.mjs`
-  and assessments/questions via SQL or the Supabase Table Editor.
+`/admin` — sign in at `/admin/login` (email + password, scrypt-hashed; create
+the first admin with `scripts/seed-admin.mjs`). The admin session is a separate
+signed cookie (12h) and the routes are gated by middleware and re-checked on
+every mutation.
+
+- **Cohorts** — create and switch between them.
+- **Members** — create a member and get a one-time access code (shown once,
+  never stored in clear); revoke / restore access.
+- **Assessments** — create, publish / unpublish.
+- **Questions** — add multiple-choice questions with a topic and explanation;
+  delete them.
+- **Analytics** — percentage correct per topic across submitted attempts, plus a
+  results table and cohort average.
+
+Still optional/future: admin TOTP, bulk CSV question import, and question
+editing/versioning.
 
 ---
 

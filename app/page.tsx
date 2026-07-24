@@ -7,7 +7,7 @@ import { MissionVision } from "@/components/sections/MissionVision";
 import { Programs } from "@/components/sections/Programs";
 import { MjfGoals } from "@/components/sections/MjfGoals";
 import { Faith } from "@/components/sections/Faith";
-import { Gallery } from "@/components/sections/Gallery";
+import { PastPrograms } from "@/components/sections/PastPrograms";
 import { Testimonies } from "@/components/sections/Testimonies";
 
 export default function HomePage() {
@@ -21,7 +21,7 @@ export default function HomePage() {
         <Programs />
         <MjfGoals />
         <Faith />
-        <Gallery />
+        <PastPrograms />
         <Testimonies />
         <JoinForm />
       </main>

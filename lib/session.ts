@@ -101,3 +101,59 @@ export function sessionCookieOptions(maxAge: number = MAX_AGE_SECONDS) {
     maxAge,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Admin sessions — same signing primitive, a separate cookie, a shorter life.
+// ---------------------------------------------------------------------------
+
+export const ADMIN_COOKIE = "sc_admin";
+const ADMIN_MAX_AGE_SECONDS = 60 * 60 * 12; // 12 hours
+
+export type AdminSessionPayload = { aid: string; role: string; exp: number };
+
+export async function signAdminSession(input: { aid: string; role: string }): Promise<string> {
+  const payload: AdminSessionPayload = {
+    ...input,
+    exp: Math.floor(Date.now() / 1000) + ADMIN_MAX_AGE_SECONDS,
+  };
+  const payloadB64 = b64urlEncode(new TextEncoder().encode(JSON.stringify(payload)));
+  const sig = await hmac(payloadB64);
+  return `${payloadB64}.${sig}`;
+}
+
+export async function verifyAdminSession(
+  token: string | undefined | null
+): Promise<AdminSessionPayload | null> {
+  if (!token) return null;
+  const dot = token.indexOf(".");
+  if (dot < 0) return null;
+  const payloadB64 = token.slice(0, dot);
+  const sig = token.slice(dot + 1);
+
+  let expected: string;
+  try {
+    expected = await hmac(payloadB64);
+  } catch {
+    return null;
+  }
+  if (!timingSafeEqual(sig, expected)) return null;
+
+  try {
+    const payload = JSON.parse(new TextDecoder().decode(b64urlDecode(payloadB64))) as AdminSessionPayload;
+    if (!payload?.aid || !payload?.role || typeof payload.exp !== "number") return null;
+    if (payload.exp < Math.floor(Date.now() / 1000)) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+export function adminCookieOptions(maxAge: number = ADMIN_MAX_AGE_SECONDS) {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+    path: "/",
+    maxAge,
+  };
+}

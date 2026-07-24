@@ -64,13 +64,22 @@ export const mjfGoals = [
   },
 ];
 
-export const gallery = [
-  { src: "/gallery/worship-01.jpg", alt: "Congregation in worship at Outpouring, 8th Edition" },
-  { src: "/gallery/worship-02.jpg", alt: "Lead worshipper ministering on stage" },
-  { src: "/gallery/worship-03.jpg", alt: "Saxophonist leading instrumental worship" },
-  { src: "/gallery/worship-04.jpg", alt: "The worship team on stage" },
-  { src: "/gallery/worship-05.jpg", alt: "Young adults gathered for the evening session" },
-  { src: "/gallery/worship-06.jpg", alt: "The Shepherd's Crew team after the service" },
+/**
+ * Past programs the ministry has held. Photos are real event images; add more
+ * program entries here as future editions happen.
+ */
+export const pastPrograms = [
+  {
+    name: "Outpouring",
+    edition: "Atmosphere of Worship & Praise · 8th Edition",
+    year: "2025",
+    blurb:
+      "A God-saturated night of worship, revival, and praise. The room filled, burdens lifted, and a generation encountered God's presence together.",
+    images: [
+      { src: "/programs/outpouring-01.jpg", alt: "The congregation in worship at Outpouring, 8th Edition", width: 2560, height: 1706 },
+      { src: "/programs/outpouring-02.jpg", alt: "The Shepherd's Crew team at Outpouring, 8th Edition", width: 1600, height: 1066 },
+    ],
+  },
 ];
 
 /**

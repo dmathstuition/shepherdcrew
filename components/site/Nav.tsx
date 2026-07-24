@@ -38,16 +38,18 @@ export function Nav() {
     >
       <div className="mx-auto flex max-w-shell items-center justify-between px-6 py-4 lg:px-10">
         <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo-shepherds-crew.png"
-            alt="The Shepherd's Crew"
-            width={44}
-            height={44}
-            className="h-11 w-11 object-contain"
-            priority
-          />
-          <span className="hidden font-display text-lg leading-none tracking-wide sm:block">
-            THE SHEPHERD&rsquo;S CREW
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+            <Image
+              src="/logo-shepherds-crew.png"
+              alt="The Shepherd's Crew"
+              width={44}
+              height={44}
+              className="h-[86%] w-[86%] object-contain"
+              priority
+            />
+          </span>
+          <span className="hidden font-display text-lg font-semibold leading-none tracking-wide sm:block">
+            The Shepherd&rsquo;s Crew
           </span>
         </Link>
 

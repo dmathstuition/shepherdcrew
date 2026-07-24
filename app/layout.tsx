@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Anton, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Anton({
-  weight: "400",
+const display = Playfair_Display({
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
