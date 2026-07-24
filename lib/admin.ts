@@ -97,7 +97,12 @@ export async function listCohorts(): Promise<Cohort[]> {
 
 export async function createCohort(name: string, slug: string, startsOn: string | null): Promise<void> {
   const { error } = await db().from("cohorts").insert({ name, slug, starts_on: startsOn || null });
-  if (error) throw new Error(error.message);
+  if (error) {
+    if (/duplicate|unique/i.test(error.message)) {
+      throw new Error("A cohort with that name already exists — select it from the list above instead of creating a new one.");
+    }
+    throw new Error(describeDbError(error));
+  }
 }
 
 // ---- members ----
