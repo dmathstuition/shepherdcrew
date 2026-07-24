@@ -1,7 +1,43 @@
 # Class portal — architecture notes
 
-Not built yet. This is the plan the landing pages assume, written down so the next
-session doesn't restart from a blank page.
+This is the plan the portal follows. The **member-facing exam flow is now built**;
+the admin surface is the remaining piece (see "Admin surface" below).
+
+## What is implemented
+
+- **Member login** by access code (`/portal`) — no passwords. Two factors: the
+  code they were issued plus their name. Codes are stored only as
+  `HMAC-SHA256(PORTAL_SESSION_SECRET, code)`, so a database leak can't be
+  brute-forced back to working codes without the server secret.
+- **Signed httpOnly session cookie** (`lib/session.ts`), verified in Edge
+  middleware (`middleware.ts`) on every `/portal/exam*` and `/portal/result*`
+  request, and re-checked server-side on every mutation (`lib/current-member.ts`).
+- **Exam list** (`/portal/exams`) and **exam runner** (`/portal/exam/[id]`):
+  per-attempt question shuffle, a timer, autosave on every choice, and a
+  question palette.
+- **Server-authoritative security** (`lib/portal.ts`):
+  - correct answers and explanations are never sent to the exam client;
+  - timing is enforced from `attempts.started_at` on the server — a late save is
+    rejected (409) and the client auto-submits;
+  - one attempt per member per assessment, enforced by a unique DB constraint;
+  - scoring runs entirely on the server at submit.
+- **Result page** (`/portal/result/[attemptId]`) reveals the answer key and
+  explanations only after submission.
+- **Schema + RLS**: `supabase/migrations/…_portal.sql` (RLS on, no policies —
+  service-role only). Demo data in `supabase/seed.sql`; a demo member/access
+  code via `node scripts/seed-portal-demo.mjs`.
+
+## Still to build
+
+- Admin authentication (email + password + TOTP) and the admin surface below.
+- Until the admin UI exists, create members with `scripts/seed-portal-demo.mjs`
+  and assessments/questions via SQL or the Supabase Table Editor.
+
+---
+
+## Original plan
+
+The rest of this document is the original design the above implements.
 
 ## The decision that shapes everything else: no passwords
 
