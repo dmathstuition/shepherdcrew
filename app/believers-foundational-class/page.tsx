@@ -27,19 +27,21 @@ export default function BfcPage() {
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(90% 60% at 20% 0%, rgba(242,106,33,0.20) 0%, rgba(7,11,30,0) 60%), radial-gradient(80% 60% at 90% 20%, rgba(33,72,184,0.28) 0%, rgba(7,11,30,0) 60%)",
+                "radial-gradient(90% 60% at 20% 0%, rgba(198,162,76,0.14) 0%, rgba(7,12,26,0) 60%), radial-gradient(80% 60% at 90% 20%, rgba(37,64,124,0.30) 0%, rgba(7,12,26,0) 60%)",
             }}
           />
           <div className="relative shell">
             <Reveal>
               <div className="flex items-center gap-4">
-                <Image
-                  src="/logo-mjf.png"
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="h-11 w-11 rounded-full object-contain"
-                />
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+                  <Image
+                    src="/logo-mjf.png"
+                    alt="Making Jesus Famous"
+                    width={56}
+                    height={56}
+                    className="h-[86%] w-[86%] object-contain"
+                  />
+                </span>
                 <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
                   {bfc.cohort} &middot; {bfc.length}
                 </p>

@@ -30,7 +30,7 @@ export function Programs() {
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               <div className="relative min-h-[300px] overflow-hidden lg:min-h-[440px]">
                 <Image
-                  src="/gallery/worship-01.jpg"
+                  src="/programs/outpouring-01.jpg"
                   alt="Congregation worshipping at Atmosphere of Worship and Praise"
                   fill
                   sizes="(max-width: 1024px) 100vw, 55vw"
@@ -111,13 +111,15 @@ export function Programs() {
           <Reveal delay={220}>
             <article className="flex h-full flex-col rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-11">
               <div className="flex items-center gap-4">
-                <Image
-                  src="/logo-mjf.png"
-                  alt="Making Jesus Famous"
-                  width={52}
-                  height={52}
-                  className="h-12 w-12 rounded-full object-contain"
-                />
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+                  <Image
+                    src="/logo-mjf.png"
+                    alt="Making Jesus Famous"
+                    width={56}
+                    height={56}
+                    className="h-[86%] w-[86%] object-contain"
+                  />
+                </span>
                 <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
                   Digital movement
                 </p>
