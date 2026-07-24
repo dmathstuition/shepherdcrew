@@ -77,6 +77,10 @@ export const pastPrograms = [
       "A God-saturated night of worship, revival, and praise. The room filled, burdens lifted, and a generation encountered God's presence together.",
     images: [
       { src: "/programs/outpouring-01.jpg", alt: "The congregation in worship at Outpouring, 8th Edition", width: 2560, height: 1706 },
+      { src: "/programs/outpouring-04.jpg", alt: "The congregation dancing in praise at Outpouring, 8th Edition", width: 2560, height: 1706 },
+      { src: "/programs/outpouring-03.jpg", alt: "Worship leaders ministering on stage at Outpouring, 8th Edition", width: 1600, height: 1066 },
+      { src: "/programs/outpouring-06.jpg", alt: "The Shepherd's Crew team group photo at Outpouring, 8th Edition", width: 1600, height: 1066 },
+      { src: "/programs/outpouring-05.jpg", alt: "Young adults gathered for the evening session at Outpouring, 8th Edition", width: 1600, height: 1066 },
       { src: "/programs/outpouring-02.jpg", alt: "The Shepherd's Crew team at Outpouring, 8th Edition", width: 1600, height: 1066 },
     ],
   },
