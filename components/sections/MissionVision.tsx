@@ -10,7 +10,7 @@ export function MissionVision() {
       <div className="shell">
         <div className="grid gap-6 lg:grid-cols-3">
           <Reveal className="lg:col-span-2">
-            <div className="h-full rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:p-12">
+            <div className="lift h-full rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:p-12">
               <Eyebrow>Mission</Eyebrow>
               <p className="font-display text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.12] text-ink">
                 {mission}
@@ -19,7 +19,7 @@ export function MissionVision() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="h-full rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-12">
+            <div className="lift h-full rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-12">
               <Eyebrow>Vision</Eyebrow>
               <p className="text-[17px] leading-[1.75] text-muted">{vision}</p>
             </div>

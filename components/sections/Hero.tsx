@@ -11,7 +11,7 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-shell px-6 lg:px-10">
         <Reveal>
-          <div className="mx-auto mb-10 grid h-28 w-28 place-items-center rounded-full bg-white shadow-coin ring-1 ring-gold/40 sm:h-32 sm:w-32">
+          <div className="animate-float mx-auto mb-10 grid h-28 w-28 place-items-center rounded-full bg-white shadow-coin ring-1 ring-gold/40 sm:h-32 sm:w-32">
             <Image
               src="/logo-shepherds-crew.png"
               alt="The Shepherd's Crew logo — a worshipper within a flame"
@@ -68,6 +68,18 @@ export function Hero() {
           </div>
         </Reveal>
       </div>
+
+      {/* Scroll cue */}
+      <Link
+        href="#about"
+        aria-label="Scroll to content"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-faint transition-colors hover:text-gold sm:flex"
+      >
+        <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+        <svg className="animate-bob" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </Link>
     </section>
   );
 }

@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Playfair_Display({
-  weight: ["500", "600", "700"],
+// Distinctive, premium type: Fraunces (characterful serif with a calligraphic
+// italic) for display, Manrope for body.
+const display = Fraunces({
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
 });
 
-const body = Plus_Jakarta_Sans({
+const body = Manrope({
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",

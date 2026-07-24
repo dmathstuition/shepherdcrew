@@ -7,7 +7,7 @@ import { JoinForm } from "@/components/site/JoinForm";
 import { Reveal } from "@/components/site/Reveal";
 import { BannerRail } from "@/components/site/BannerRail";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import { bfc, programs } from "@/lib/content";
+import { bfc, bfcFlyers, programs } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -83,6 +83,45 @@ export default function BfcPage() {
                 Already enrolled? Use the access code sent to you when you joined.
               </p>
             </Reveal>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------- */}
+        <section className="band">
+          <BannerRail label="This cohort" tone="stage" />
+          <div className="shell">
+            <Reveal>
+              <Eyebrow>What&rsquo;s on</Eyebrow>
+              <h2 className="max-w-[20ch] font-display text-[clamp(2.2rem,5.2vw,4rem)] leading-[0.95]">
+                THIS COHORT
+              </h2>
+              <p className="mt-6 max-w-[60ch] text-muted">
+                Save the dates. Both run through July on WhatsApp and Telegram.
+              </p>
+            </Reveal>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {bfcFlyers.map((flyer, i) => (
+                <Reveal key={flyer.src} delay={i * 100}>
+                  <figure className="group overflow-hidden rounded-3xl border border-line/15 bg-surface">
+                    <div className="overflow-hidden">
+                      <Image
+                        src={flyer.src}
+                        alt={flyer.alt}
+                        width={flyer.width}
+                        height={flyer.height}
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="h-auto w-full transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <figcaption className="p-5">
+                      <p className="font-display text-lg font-semibold italic">{flyer.label}</p>
+                      <p className="mt-1 text-sm text-faint">{flyer.caption}</p>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 

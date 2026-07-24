@@ -26,7 +26,7 @@ export function Programs() {
 
         {/* AOWAP — the flagship, given the largest treatment */}
         <Reveal delay={100}>
-          <article className="group relative mt-16 overflow-hidden rounded-3xl border border-line/15 bg-surface2">
+          <article className="lift group relative mt-16 overflow-hidden rounded-3xl border border-line/15 bg-surface2">
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               <div className="relative min-h-[300px] overflow-hidden lg:min-h-[440px]">
                 <Image
@@ -73,7 +73,7 @@ export function Programs() {
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Believers Foundational Class */}
           <Reveal delay={140}>
-            <article className="flex h-full flex-col rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:p-11">
+            <article className="lift flex h-full flex-col rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:p-11">
               <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
                 {bfc.cohort} &middot; {bfc.length}
               </p>
@@ -109,7 +109,7 @@ export function Programs() {
 
           {/* MJF */}
           <Reveal delay={220}>
-            <article className="flex h-full flex-col rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-11">
+            <article className="lift flex h-full flex-col rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-11">
               <div className="flex items-center gap-4">
                 <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white ring-1 ring-gold/30">
                   <Image

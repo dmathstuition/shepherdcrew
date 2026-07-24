@@ -157,6 +157,23 @@ export async function setAssessmentPublished(id: string, isPublished: boolean): 
   if (error) throw new Error(error.message);
 }
 
+export async function updateAssessment(
+  id: string,
+  input: { title: string; weekNumber: number | null; durationMinutes: number }
+): Promise<void> {
+  if (input.title.trim().length < 2) throw new Error("Enter a title.");
+  if (input.durationMinutes < 1) throw new Error("Duration must be at least 1 minute.");
+  const { error } = await db()
+    .from("assessments")
+    .update({
+      title: input.title.trim(),
+      week_number: input.weekNumber,
+      duration_minutes: input.durationMinutes,
+    })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
 export async function getAssessmentBasic(id: string): Promise<AdminAssessment | null> {
   const { data } = await db()
     .from("assessments")
@@ -175,12 +192,13 @@ export type AdminQuestion = {
   correct_option: number;
   topic: string | null;
   position: number;
+  explanation: string | null;
 };
 
 export async function listQuestions(assessmentId: string): Promise<AdminQuestion[]> {
   const { data } = await db()
     .from("questions")
-    .select("id, stem, options, correct_option, topic, position")
+    .select("id, stem, options, correct_option, topic, position, explanation")
     .eq("assessment_id", assessmentId)
     .order("position", { ascending: true });
   return (data ?? []) as AdminQuestion[];
@@ -223,6 +241,40 @@ export async function addQuestion(input: {
 
 export async function deleteQuestion(id: string): Promise<void> {
   const { error } = await db().from("questions").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export type FullQuestion = AdminQuestion & { explanation: string | null };
+
+export async function getQuestionById(id: string): Promise<FullQuestion | null> {
+  const { data } = await db()
+    .from("questions")
+    .select("id, stem, options, correct_option, topic, position, explanation")
+    .eq("id", id)
+    .maybeSingle();
+  return (data as FullQuestion) ?? null;
+}
+
+export async function updateQuestion(
+  id: string,
+  input: { stem: string; options: string[]; correctOption: number; explanation: string | null; topic: string | null }
+): Promise<void> {
+  const cleaned = input.options.map((o) => o.trim()).filter((o) => o.length > 0);
+  if (input.stem.trim().length < 3) throw new Error("Enter the question.");
+  if (cleaned.length < 2) throw new Error("A question needs at least two options.");
+  if (input.correctOption < 0 || input.correctOption >= cleaned.length) {
+    throw new Error("The correct option is out of range.");
+  }
+  const { error } = await db()
+    .from("questions")
+    .update({
+      stem: input.stem.trim(),
+      options: cleaned,
+      correct_option: input.correctOption,
+      explanation: input.explanation?.trim() || null,
+      topic: input.topic?.trim() || null,
+    })
+    .eq("id", id);
   if (error) throw new Error(error.message);
 }
 

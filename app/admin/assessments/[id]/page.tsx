@@ -8,7 +8,7 @@ import {
   getResults,
   getTopicAnalytics,
 } from "@/lib/admin";
-import { AddQuestionForm } from "./QuestionForm";
+import { AddQuestionForm, QuestionsAdmin, EditAssessmentForm } from "./QuestionForm";
 import { ToggleButton } from "../../AdminForms";
 
 export const metadata: Metadata = {
@@ -61,12 +61,15 @@ export default async function AssessmentAdmin({ params }: { params: { id: string
             {assessment.is_published ? "published" : "draft"}
           </p>
         </div>
-        <ToggleButton
-          url="/api/admin/assessments"
-          body={{ action: assessment.is_published ? "unpublish" : "publish", assessmentId: assessment.id }}
-        >
-          {assessment.is_published ? "Unpublish" : "Publish"}
-        </ToggleButton>
+        <div className="flex items-center gap-2">
+          <EditAssessmentForm assessment={assessment} />
+          <ToggleButton
+            url="/api/admin/assessments"
+            body={{ action: assessment.is_published ? "unpublish" : "publish", assessmentId: assessment.id }}
+          >
+            {assessment.is_published ? "Unpublish" : "Publish"}
+          </ToggleButton>
+        </div>
       </header>
 
       {/* Add question */}
@@ -77,42 +80,12 @@ export default async function AssessmentAdmin({ params }: { params: { id: string
         </div>
       </section>
 
-      {/* Question list */}
+      {/* Question list — editable */}
       <section className={`${card} mt-6`}>
         <h2 className={h2}>Questions</h2>
-        <ol className="mt-6 space-y-3">
-          {questions.length === 0 && <p className="text-sm text-faint">No questions yet.</p>}
-          {questions.map((q, i) => (
-            <li key={q.id} className="rounded-xl border border-line/15 bg-surface2 p-4">
-              <div className="flex items-start justify-between gap-4">
-                <p className="font-medium">
-                  <span className="text-faint">{i + 1}. </span>
-                  {q.stem}
-                </p>
-                <ToggleButton url="/api/admin/questions" body={{ action: "delete", questionId: q.id }}>
-                  Delete
-                </ToggleButton>
-              </div>
-              <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
-                {q.options.map((opt, oi) => (
-                  <li
-                    key={oi}
-                    className={`rounded-md px-2.5 py-1.5 text-sm ${
-                      oi === q.correct_option ? "bg-emerald-500/10 text-emerald-200" : "text-muted"
-                    }`}
-                  >
-                    <span className="mr-2 font-mono text-xs text-faint">{String.fromCharCode(65 + oi)}</span>
-                    {opt}
-                    {oi === q.correct_option && <span className="ml-2 text-xs">correct</span>}
-                  </li>
-                ))}
-              </ul>
-              {q.topic && (
-                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-faint">Topic: {q.topic}</p>
-              )}
-            </li>
-          ))}
-        </ol>
+        <div className="mt-6">
+          <QuestionsAdmin questions={questions} />
+        </div>
       </section>
 
       {/* Topic analytics */}
