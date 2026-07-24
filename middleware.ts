@@ -34,8 +34,8 @@ export const config = {
     "/portal/exams/:path*",
     "/portal/exam/:path*",
     "/portal/result/:path*",
-    // All admin routes except the login page and its API.
-    "/admin/((?!login).*)",
+    // All admin routes except the login and first-admin setup pages.
+    "/admin/((?!login|setup).*)",
     "/admin",
   ],
 };

@@ -33,12 +33,38 @@ in you need:
 
 ---
 
-## 2. Create your admin login
+## 2. Create your admin login — from the browser (no terminal)
 
-Admin accounts are email + password. There is no public sign-up (by design) —
-you create the first admin from the command line with the service-role key.
+Admin accounts are email + password. There is no public sign-up (by design). You
+create the **first** admin from a one-time setup page, then add any further
+admins from the dashboard. No command line needed.
 
-Run this once, replacing the email and password:
+### First admin (do this once)
+
+1. In your host, add one more environment variable and redeploy:
+   - **Vercel:** Project → Settings → Environment Variables → add
+     `ADMIN_SETUP_TOKEN` = any long random string (e.g. mash the keyboard, or
+     paste a UUID). Then Deployments → redeploy so the new variable takes effect.
+2. Go to **`https://<your-site>/admin/setup`**.
+3. Enter your email, a password (≥ 8 characters), and the **same
+   `ADMIN_SETUP_TOKEN`** value you set in step 1.
+4. Submit — you're created and signed in as the first admin.
+5. (Optional) Back in Vercel, delete the `ADMIN_SETUP_TOKEN` variable. The setup
+   page has already closed itself now that an admin exists.
+
+The password is **scrypt-hashed** before storage — the plain password is never
+saved. `/admin/setup` only works while there are zero admins *and* the token
+matches, so it can't be used to create rogue accounts later.
+
+### Adding more admins
+
+Once signed in, open the dashboard's **Admins** section, enter an email and
+password, and click **Add admin**. Remove an admin with **Remove** (you can't
+remove yourself or the last remaining admin). No token or terminal needed.
+
+### Alternative: the terminal (only if you have one)
+
+If you do have a local machine with Node, you can instead run:
 
 ```bash
 SUPABASE_URL="https://YOURPROJECT.supabase.co" \
@@ -46,22 +72,7 @@ SUPABASE_SERVICE_ROLE_KEY="your-service-role-key" \
   node scripts/seed-admin.mjs admin@theshepherdscrew.org 'a-strong-password'
 ```
 
-You should see `✅ Admin ready: admin@theshepherdscrew.org`.
-
-- The password is **scrypt-hashed** before storage — the plain password is never
-  saved.
-- Choose a strong password (≥ 8 characters; longer is better).
-
-### Adding more admins
-
-Run the same command again with a different email. Re-running it with an
-**existing** email simply resets that admin's password (handy if one is
-forgotten).
-
-```bash
-SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
-  node scripts/seed-admin.mjs second.admin@theshepherdscrew.org 'another-password'
-```
+Re-running it with an existing email resets that admin's password.
 
 ---
 

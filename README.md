@@ -65,15 +65,16 @@ Set up:
 
 ### Admin
 
-Manage the portal at `/admin`. Create the first admin account:
+Manage the portal at `/admin`. Create the **first** admin from the browser (no
+terminal): set an `ADMIN_SETUP_TOKEN` env var on your host, visit `/admin/setup`,
+and enter an email, password, and that token. Add further admins from the
+dashboard's **Admins** section. Full walkthrough in `docs/admin-guide.md`.
 
-```
-SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… \
-  node scripts/seed-admin.mjs admin@yourchurch.org 'a-strong-password'
-```
+Then at `/admin` you can create cohorts, issue member access codes, build and
+edit assessments and questions, and see per-topic analytics and results.
 
-Then sign in at `/admin/login` to create cohorts, issue member access codes,
-build assessments and questions, and see per-topic analytics and results.
+(If you have a terminal, `node scripts/seed-admin.mjs <email> <password>` with the
+Supabase env vars is an alternative way to create an admin.)
 
 ## Before launch — actual blockers
 

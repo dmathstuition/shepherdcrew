@@ -243,3 +243,45 @@ export function ToggleButton({
     </button>
   );
 }
+
+export function CreateAdminForm() {
+  const router = useRouter();
+  const [err, setErr] = useState<string | null>(null);
+  const [ok, setOk] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  return (
+    <form
+      className="grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        setErr(null);
+        setOk(null);
+        setLoading(true);
+        const f = new FormData(e.currentTarget);
+        const { ok: good, data } = await postJSON("/api/admin/admins", {
+          email: f.get("email"),
+          password: f.get("password"),
+        });
+        setLoading(false);
+        if (!good) return setErr(data.error ?? "Failed.");
+        setOk(`Added ${String(f.get("email"))}.`);
+        (e.target as HTMLFormElement).reset();
+        router.refresh();
+      }}
+    >
+      <div>
+        <label className={label}>Email</label>
+        <input name="email" type="email" required placeholder="name@church.org" className={input} />
+      </div>
+      <div>
+        <label className={label}>Password</label>
+        <input name="password" type="password" required minLength={8} placeholder="≥ 8 characters" className={input} />
+      </div>
+      <button className={btn} disabled={loading}>
+        {loading ? "Adding…" : "Add admin"}
+      </button>
+      {err && <p className="text-sm text-ember sm:col-span-3">{err}</p>}
+      {ok && <p className="text-sm text-emerald-300 sm:col-span-3">{ok}</p>}
+    </form>
+  );
+}

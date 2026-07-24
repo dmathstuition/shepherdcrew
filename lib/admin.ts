@@ -54,6 +54,38 @@ export async function getAdminById(id: string): Promise<Admin | null> {
   return (data as Admin) ?? null;
 }
 
+// ---- admin management ----
+
+export async function countAdmins(): Promise<number> {
+  const { count, error } = await db().from("admins").select("id", { count: "exact", head: true });
+  if (error) throw new Error(error.message);
+  return count ?? 0;
+}
+
+export async function listAdmins(): Promise<Admin[]> {
+  const { data } = await db().from("admins").select("id, email, role").order("email");
+  return (data ?? []) as Admin[];
+}
+
+/** Create an admin. Reuses the scrypt hashing used by verifyAdminLogin. */
+export async function createAdmin(email: string, password: string, role = "admin"): Promise<void> {
+  const normalized = email.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) throw new Error("Enter a valid email address.");
+  if (password.length < 8) throw new Error("Password must be at least 8 characters.");
+  const { error } = await db()
+    .from("admins")
+    .insert({ email: normalized, password_hash: hashPassword(password), role });
+  if (error) {
+    if (/duplicate|unique/i.test(error.message)) throw new Error("An admin with that email already exists.");
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteAdmin(id: string): Promise<void> {
+  const { error } = await db().from("admins").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
 // ---- cohorts ----
 
 export type Cohort = { id: string; name: string; slug: string; starts_on: string | null };

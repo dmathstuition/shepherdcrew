@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { currentAdmin } from "@/lib/current-admin";
-import { listCohorts, listMembers, listAssessments } from "@/lib/admin";
-import { CreateCohortForm, CreateMemberForm, CreateAssessmentForm, ToggleButton, LogoutButton } from "./AdminForms";
+import { listCohorts, listMembers, listAssessments, listAdmins } from "@/lib/admin";
+import {
+  CreateCohortForm,
+  CreateMemberForm,
+  CreateAssessmentForm,
+  CreateAdminForm,
+  ToggleButton,
+  LogoutButton,
+} from "./AdminForms";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -27,6 +34,8 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
   const [members, assessments] = selectedId
     ? await Promise.all([listMembers(selectedId), listAssessments(selectedId)])
     : [[], []];
+
+  const admins = await listAdmins();
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-4xl px-6 py-14">
@@ -135,6 +144,34 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
           </section>
         </>
       )}
+
+      {/* Admins */}
+      <section className={`${card} mt-6`}>
+        <h2 className={h2}>Admins</h2>
+        <p className="mt-2 text-sm text-faint">People who can sign in and manage the portal.</p>
+        <div className="mt-6"><CreateAdminForm /></div>
+
+        <div className="mt-8 divide-y divide-line/15">
+          {admins.map((a) => (
+            <div key={a.id} className="flex items-center justify-between gap-4 py-3">
+              <div>
+                <p className="font-semibold">
+                  {a.email}
+                  {a.id === admin.id && <span className="ml-2 text-xs text-gold">you</span>}
+                </p>
+                <p className="text-xs text-faint">{a.role}</p>
+              </div>
+              {a.id !== admin.id && admins.length > 1 ? (
+                <ToggleButton url="/api/admin/admins" body={{ action: "delete", adminId: a.id }}>
+                  Remove
+                </ToggleButton>
+              ) : (
+                <span className="text-xs text-faint">{admins.length <= 1 ? "last admin" : "—"}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
