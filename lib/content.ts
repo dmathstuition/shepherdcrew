@@ -186,6 +186,26 @@ export const bfc = {
   },
 };
 
+/* BFC promotional flyers */
+export const bfcFlyers = [
+  {
+    src: "/flyers/welcome-to-bfc.jpg",
+    label: "Welcome to BFC",
+    caption: "Cohort 1.0 · July 2026",
+    alt: "Welcome to BFC flyer — Cohort 1.0, July 2026, on the BFC Telegram page",
+    width: 736,
+    height: 920,
+  },
+  {
+    src: "/flyers/watchmen-assembly.jpg",
+    label: "The Watchmen Assembly",
+    caption: "Every Friday in July · Be rooted, be built, be sent",
+    alt: "The Watchmen Assembly flyer — every Friday in July",
+    width: 736,
+    height: 981,
+  },
+];
+
 /* The Visioneer / convener */
 export const visioneer = {
   name: "Shepherd Sam",

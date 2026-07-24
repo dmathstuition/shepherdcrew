@@ -81,16 +81,98 @@
 }
 
 @layer utilities {
+  /* Gold headline with a slow sweeping sheen. */
   .text-gold-gradient {
-    @apply bg-gradient-to-b from-gold to-ember bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      100deg,
+      #b8912f 0%,
+      #c6a24c 28%,
+      #fff2cf 50%,
+      #c6a24c 72%,
+      #b8912f 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
   }
 
   .gold-hairline {
     background: linear-gradient(90deg, rgba(184, 145, 47, 0) 0%, rgba(184, 145, 47, 0.7) 50%, rgba(184, 145, 47, 0) 100%);
   }
 
-  /* Theme-aware hero lighting. */
+  /* Theme-aware hero lighting, gently drifting. */
   .hero-aura {
     background: var(--aura);
+    animation: auraDrift 14s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: floaty 6s ease-in-out infinite;
+  }
+
+  .animate-bob {
+    animation: bob 1.8s ease-in-out infinite;
+  }
+
+  /* Reveal-on-scroll of a growing gold underline. */
+  .rule-grow {
+    transform-origin: left;
+    animation: ruleGrow 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Hover lift for cards. */
+  .lift {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+  }
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 55px -26px rgba(4, 7, 15, 0.55);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 220% center;
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes auraDrift {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+@keyframes ruleGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

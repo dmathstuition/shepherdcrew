@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/current-admin";
-import { createAssessment, setAssessmentPublished } from "@/lib/admin";
+import { createAssessment, setAssessmentPublished, updateAssessment } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -20,6 +20,25 @@ export async function POST(request: Request) {
     if (!id) return NextResponse.json({ error: "Missing assessment." }, { status: 400 });
     try {
       await setAssessmentPublished(id, payload.action === "publish");
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
+  }
+
+  // Edit assessment settings.
+  if (payload.action === "update") {
+    const id = String(payload.assessmentId ?? "");
+    if (!id) return NextResponse.json({ error: "Missing assessment." }, { status: 400 });
+    const title = String(payload.title ?? "").trim();
+    const weekNumber = payload.weekNumber != null && payload.weekNumber !== "" ? Number(payload.weekNumber) : null;
+    const durationMinutes = Number(payload.durationMinutes) || 20;
+    try {
+      await updateAssessment(id, {
+        title,
+        weekNumber: weekNumber != null && Number.isFinite(weekNumber) ? weekNumber : null,
+        durationMinutes,
+      });
     } catch (error) {
       return NextResponse.json({ error: (error as Error).message }, { status: 400 });
     }

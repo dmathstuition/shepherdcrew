@@ -48,7 +48,7 @@ export function Reveal({
     <div
       ref={ref}
       className={`transition-all duration-[900ms] ease-reveal ${
-        shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        shown ? "translate-y-0 scale-100 opacity-100 blur-0" : "translate-y-10 scale-[0.98] opacity-0 blur-[2px]"
       } ${className}`}
     >
       {children}

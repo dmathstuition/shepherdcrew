@@ -11,7 +11,7 @@ export function Visioneer() {
       <div className="shell">
         <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <Reveal>
-            <figure className="relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-line/15 bg-surface">
+            <figure className="lift relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-line/15 bg-surface">
               <Image
                 src={visioneer.image}
                 alt={`${visioneer.name}, ${visioneer.role}`}
