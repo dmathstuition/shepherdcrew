@@ -83,7 +83,13 @@ export async function createAdmin(email: string, password: string, role = "admin
 
 export async function deleteAdmin(id: string): Promise<void> {
   const { error } = await db().from("admins").delete().eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(describeDbError(error));
+}
+
+export async function resetAdminPassword(id: string, password: string): Promise<void> {
+  if (password.length < 8) throw new Error("Password must be at least 8 characters.");
+  const { error } = await db().from("admins").update({ password_hash: hashPassword(password) }).eq("id", id);
+  if (error) throw new Error(describeDbError(error));
 }
 
 // ---- cohorts ----
@@ -103,6 +109,22 @@ export async function createCohort(name: string, slug: string, startsOn: string 
     }
     throw new Error(describeDbError(error));
   }
+}
+
+export async function updateCohort(id: string, name: string, startsOn: string | null): Promise<void> {
+  if (name.trim().length < 2) throw new Error("Enter a cohort name.");
+  const { error } = await db()
+    .from("cohorts")
+    .update({ name: name.trim(), starts_on: startsOn || null })
+    .eq("id", id);
+  if (error) throw new Error(describeDbError(error));
+}
+
+/** Delete a cohort. Cascades to its members, assessments, questions,
+ *  attempts, and answers (ON DELETE CASCADE) — destructive. */
+export async function deleteCohort(id: string): Promise<void> {
+  const { error } = await db().from("cohorts").delete().eq("id", id);
+  if (error) throw new Error(describeDbError(error));
 }
 
 // ---- members ----
@@ -142,7 +164,13 @@ export async function createMember(
 
 export async function setMemberRevoked(memberId: string, revoked: boolean): Promise<void> {
   const { error } = await db().from("members").update({ revoked }).eq("id", memberId);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(describeDbError(error));
+}
+
+/** Delete a member. Cascades to their attempts and answers — destructive. */
+export async function deleteMember(id: string): Promise<void> {
+  const { error } = await db().from("members").delete().eq("id", id);
+  if (error) throw new Error(describeDbError(error));
 }
 
 // ---- assessments ----
@@ -208,7 +236,13 @@ export async function updateAssessment(
       duration_minutes: input.durationMinutes,
     })
     .eq("id", id);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(describeDbError(error));
+}
+
+/** Delete an assessment. Cascades to its questions, attempts, and answers. */
+export async function deleteAssessment(id: string): Promise<void> {
+  const { error } = await db().from("assessments").delete().eq("id", id);
+  if (error) throw new Error(describeDbError(error));
 }
 
 export async function getAssessmentBasic(id: string): Promise<AdminAssessment | null> {

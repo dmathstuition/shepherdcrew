@@ -118,6 +118,21 @@ On the assessment page you can:
   topic, or explanation.
 - **Delete** a question.
 
+### Quick start: a ready-made General Assessment
+
+To have a full test live immediately, run `supabase/seed-general-assessment.sql`
+in the Supabase **SQL Editor**. It creates a published **General Assessment**
+(15 foundational questions) on your cohort. Members see it at `/portal` right
+away; you can edit or delete it like any other assessment.
+
+### Deleting things
+
+Every list has delete controls (with a confirmation): remove cohorts, members,
+assessments, questions, and admins. **Deletes cascade** — deleting a cohort also
+removes its members, assessments, questions, and results; deleting an assessment
+removes its questions and results; deleting a member removes their attempts. Use
+**Revoke** (not Delete) to merely block a member while keeping their record.
+
 ### Results & analytics
 Each assessment page shows:
 

@@ -285,3 +285,137 @@ export function CreateAdminForm() {
     </form>
   );
 }
+
+const btnGhost = "rounded-full border border-line/25 px-4 py-1.5 text-xs font-bold transition-colors hover:border-gold hover:text-gold";
+
+/** Destructive action with a confirm prompt. Optionally navigates after success. */
+export function ConfirmButton({
+  url,
+  body,
+  confirm,
+  redirectTo,
+  children,
+}: {
+  url: string;
+  body: unknown;
+  confirm: string;
+  redirectTo?: string;
+  children: React.ReactNode;
+}) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  return (
+    <button
+      disabled={loading}
+      onClick={async () => {
+        if (!window.confirm(confirm)) return;
+        setLoading(true);
+        const { ok, data } = await postJSON(url, body);
+        setLoading(false);
+        if (!ok) {
+          window.alert(data.error ?? "Failed.");
+          return;
+        }
+        if (redirectTo) router.push(redirectTo);
+        else router.refresh();
+      }}
+      className="rounded-full border border-rose-400/40 px-4 py-1.5 text-xs font-bold text-rose-400 transition-colors hover:border-rose-400 disabled:opacity-50"
+    >
+      {children}
+    </button>
+  );
+}
+
+export function RenameCohortForm({ cohort }: { cohort: { id: string; name: string; starts_on: string | null } }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} className={btnGhost}>
+        Rename
+      </button>
+    );
+  }
+  return (
+    <form
+      className="flex flex-wrap items-end gap-2"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        setErr(null);
+        setLoading(true);
+        const f = new FormData(e.currentTarget);
+        const { ok, data } = await postJSON("/api/admin/cohorts", {
+          action: "update",
+          cohortId: cohort.id,
+          name: f.get("name"),
+          startsOn: f.get("startsOn"),
+        });
+        setLoading(false);
+        if (!ok) return setErr(data.error ?? "Failed.");
+        setOpen(false);
+        router.refresh();
+      }}
+    >
+      <input name="name" defaultValue={cohort.name} required className={`${input} w-40`} />
+      <input name="startsOn" defaultValue={cohort.starts_on ?? ""} placeholder="Starts (optional)" className={`${input} w-36`} />
+      <button className={btn} disabled={loading}>
+        {loading ? "Saving…" : "Save"}
+      </button>
+      <button type="button" onClick={() => setOpen(false)} className={btnGhost}>
+        Cancel
+      </button>
+      {err && <p className="w-full text-sm text-ember">{err}</p>}
+    </form>
+  );
+}
+
+export function ResetAdminPassword({ adminId }: { adminId: string }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [ok, setOk] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} className={btnGhost}>
+        Reset password
+      </button>
+    );
+  }
+  return (
+    <form
+      className="flex flex-wrap items-center gap-2"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        setErr(null);
+        setOk(false);
+        setLoading(true);
+        const f = new FormData(e.currentTarget);
+        const { ok: good, data } = await postJSON("/api/admin/admins", {
+          action: "reset",
+          adminId,
+          password: f.get("password"),
+        });
+        setLoading(false);
+        if (!good) return setErr(data.error ?? "Failed.");
+        setOk(true);
+        setOpen(false);
+        router.refresh();
+      }}
+    >
+      <input name="password" type="password" required minLength={8} placeholder="New password" className={`${input} w-44`} />
+      <button className={btn} disabled={loading}>
+        {loading ? "Saving…" : "Set"}
+      </button>
+      <button type="button" onClick={() => setOpen(false)} className={btnGhost}>
+        Cancel
+      </button>
+      {ok && <span className="text-xs text-emerald-300">Updated</span>}
+      {err && <p className="w-full text-sm text-ember">{err}</p>}
+    </form>
+  );
+}

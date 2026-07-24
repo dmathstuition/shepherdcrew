@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/current-admin";
-import { createCohort } from "@/lib/admin";
+import { createCohort, updateCohort, deleteCohort } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -16,6 +16,28 @@ export async function POST(request: Request) {
     payload = await request.json();
   } catch {
     return NextResponse.json({ error: "Malformed request." }, { status: 400 });
+  }
+
+  if (payload.action === "delete") {
+    const id = String(payload.cohortId ?? "");
+    if (!id) return NextResponse.json({ error: "Missing cohort." }, { status: 400 });
+    try {
+      await deleteCohort(id);
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
+  }
+
+  if (payload.action === "update") {
+    const id = String(payload.cohortId ?? "");
+    if (!id) return NextResponse.json({ error: "Missing cohort." }, { status: 400 });
+    try {
+      await updateCohort(id, String(payload.name ?? ""), String(payload.startsOn ?? "").trim() || null);
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
   }
 
   const name = String(payload.name ?? "").trim();

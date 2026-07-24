@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/current-admin";
-import { createMember, setMemberRevoked } from "@/lib/admin";
+import { createMember, setMemberRevoked, deleteMember } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -20,6 +20,18 @@ export async function POST(request: Request) {
     if (!memberId) return NextResponse.json({ error: "Missing member." }, { status: 400 });
     try {
       await setMemberRevoked(memberId, payload.action === "revoke");
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
+  }
+
+  // Delete (removes the member and their attempts/answers).
+  if (payload.action === "delete") {
+    const memberId = String(payload.memberId ?? "");
+    if (!memberId) return NextResponse.json({ error: "Missing member." }, { status: 400 });
+    try {
+      await deleteMember(memberId);
     } catch (error) {
       return NextResponse.json({ error: (error as Error).message }, { status: 400 });
     }

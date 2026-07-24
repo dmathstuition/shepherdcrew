@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/current-admin";
-import { createAssessment, setAssessmentPublished, updateAssessment } from "@/lib/admin";
+import { createAssessment, setAssessmentPublished, updateAssessment, deleteAssessment } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -20,6 +20,18 @@ export async function POST(request: Request) {
     if (!id) return NextResponse.json({ error: "Missing assessment." }, { status: 400 });
     try {
       await setAssessmentPublished(id, payload.action === "publish");
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
+  }
+
+  // Delete an assessment (and its questions/attempts/answers).
+  if (payload.action === "delete") {
+    const id = String(payload.assessmentId ?? "");
+    if (!id) return NextResponse.json({ error: "Missing assessment." }, { status: 400 });
+    try {
+      await deleteAssessment(id);
     } catch (error) {
       return NextResponse.json({ error: (error as Error).message }, { status: 400 });
     }
