@@ -25,15 +25,15 @@ export function About() {
           </Reveal>
 
           <Reveal delay={140}>
-            <div className="space-y-6 text-[17px] leading-[1.75] text-white/70">
+            <div className="space-y-6 text-[17px] leading-[1.75] text-muted">
               {about.body.map((p) => (
                 <p key={p}>{p}</p>
               ))}
-              <p className="border-l-2 border-ember pl-6 text-white/85">{about.pullquote}</p>
+              <p className="border-l-2 border-ember pl-6 text-ink">{about.pullquote}</p>
 
               <ul className="grid gap-x-8 gap-y-3 pt-6 sm:grid-cols-2">
                 {site.pillars.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-white/60">
+                  <li key={item} className="flex items-center gap-3 text-sm text-muted">
                     <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" />
                     {item}
                   </li>

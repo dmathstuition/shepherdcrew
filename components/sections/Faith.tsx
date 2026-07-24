@@ -25,12 +25,12 @@ export function Faith() {
               {faith.map((line, i) => (
                 <li
                   key={line}
-                  className="flex gap-6 border-b border-white/10 py-7 first:border-t first:border-white/10"
+                  className="flex gap-6 border-b border-line/15 py-7 first:border-t first:border-line/15"
                 >
                   <span className="mt-1 shrink-0 font-display text-sm text-ember">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-[17px] leading-[1.7] text-white/75">{line}</p>
+                  <p className="text-[17px] leading-[1.7] text-muted">{line}</p>
                 </li>
               ))}
             </ul>

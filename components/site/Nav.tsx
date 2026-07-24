@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 
 const links = [
   { href: "/#about", label: "About" },
@@ -33,7 +34,7 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled || open ? "bg-midnight/90 backdrop-blur-md" : "bg-transparent"
+        scrolled || open ? "bg-canvas/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-shell items-center justify-between px-6 py-4 lg:px-10">
@@ -58,7 +59,7 @@ export function Nav() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-white/65 transition-colors hover:text-gold"
+              className="text-sm font-medium text-muted transition-colors hover:text-gold"
             >
               {l.label}
             </Link>
@@ -69,22 +70,26 @@ export function Nav() {
           >
             Join a program
           </Link>
+          <ThemeToggle />
         </nav>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
-        >
-          <span className={`h-[2px] w-6 bg-white transition-transform ${open ? "translate-y-[7px] rotate-45" : ""}`} />
-          <span className={`h-[2px] w-6 bg-white transition-opacity ${open ? "opacity-0" : ""}`} />
-          <span className={`h-[2px] w-6 bg-white transition-transform ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="flex h-10 w-10 flex-col items-center justify-center gap-[5px]"
+          >
+            <span className={`h-[2px] w-6 bg-ink transition-transform ${open ? "translate-y-[7px] rotate-45" : ""}`} />
+            <span className={`h-[2px] w-6 bg-ink transition-opacity ${open ? "opacity-0" : ""}`} />
+            <span className={`h-[2px] w-6 bg-ink transition-transform ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {open && (
-        <nav className="border-t border-white/10 bg-midnight px-6 py-5 md:hidden">
+        <nav className="border-t border-line/15 bg-surface px-6 py-5 md:hidden">
           {links.map((l) => (
             <Link
               key={l.href}

@@ -34,14 +34,14 @@ export default async function PortalPage() {
             />
           </span>
           <h1 className="mt-8 font-display text-4xl font-semibold leading-none">Class Portal</h1>
-          <p className="mt-4 text-white/60">
+          <p className="mt-4 text-muted">
             Enter your name and the access code your coordinator gave you. No password to remember.
           </p>
         </div>
 
         <LoginForm />
 
-        <p className="mt-8 text-center text-sm text-white/50">
+        <p className="mt-8 text-center text-sm text-faint">
           Lost your code?{" "}
           <a href={`tel:${site.contacts[0].phone}`} className="text-gold hover:underline">
             Call {site.contacts[0].name}

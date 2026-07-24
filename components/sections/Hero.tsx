@@ -6,15 +6,8 @@ import { site } from "@/lib/site";
 export function Hero() {
   return (
     <section id="top" className="relative flex min-h-screen items-center overflow-hidden pt-28">
-      {/* Soft navy light from above, a whisper of gold from below — no neon. */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(90% 55% at 50% -8%, rgba(37,64,124,0.35) 0%, rgba(7,12,26,0) 60%), radial-gradient(70% 50% at 50% 108%, rgba(198,162,76,0.12) 0%, rgba(7,12,26,0) 60%)",
-        }}
-      />
+      {/* Soft navy light from above, a whisper of gold from below — theme-aware. */}
+      <div aria-hidden className="hero-aura absolute inset-0" />
 
       <div className="relative mx-auto w-full max-w-shell px-6 lg:px-10">
         <Reveal>
@@ -44,7 +37,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={300}>
-          <p className="mx-auto mt-8 max-w-[52ch] text-center text-base leading-relaxed text-mist/65 sm:text-lg">
+          <p className="mx-auto mt-8 max-w-[52ch] text-center text-base leading-relaxed text-muted sm:text-lg">
             A Christ-centred ministry raising passionate worshippers and bold witnesses — across
             campuses, communities, and nations. Established {site.established}.
           </p>
@@ -60,7 +53,7 @@ export function Hero() {
             </Link>
             <Link
               href="#about"
-              className="w-full rounded-full border border-white/20 px-9 py-4 text-center text-sm font-bold tracking-wide text-mist transition-colors hover:border-gold hover:text-gold sm:w-auto"
+              className="w-full rounded-full border border-line/25 px-9 py-4 text-center text-sm font-bold tracking-wide text-ink transition-colors hover:border-gold hover:text-gold sm:w-auto"
             >
               Who we are
             </Link>
@@ -70,7 +63,7 @@ export function Hero() {
         <Reveal delay={520}>
           <div className="mt-16 flex items-center justify-center gap-4">
             <span className="h-px w-10 gold-hairline" />
-            <p className="text-center text-xs uppercase tracking-[0.32em] text-mist/40">{site.scripture}</p>
+            <p className="text-center text-xs uppercase tracking-[0.32em] text-faint">{site.scripture}</p>
             <span className="h-px w-10 gold-hairline" />
           </div>
         </Reveal>

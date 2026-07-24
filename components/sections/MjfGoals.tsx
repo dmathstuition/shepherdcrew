@@ -15,12 +15,12 @@ export function MjfGoals() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-px overflow-hidden rounded-3xl bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
           {mjfGoals.map((goal, i) => (
             <Reveal key={goal.title} delay={i * 70}>
-              <div className="h-full bg-midnight p-8 transition-colors duration-500 hover:bg-deep lg:p-10">
+              <div className="h-full bg-surface p-8 transition-colors duration-500 hover:bg-surface2 lg:p-10">
                 <h3 className="font-display text-2xl leading-[1.05] text-gold">{goal.title}</h3>
-                <p className="mt-4 text-[15px] leading-[1.7] text-white/65">{goal.body}</p>
+                <p className="mt-4 text-[15px] leading-[1.7] text-muted">{goal.body}</p>
               </div>
             </Reveal>
           ))}

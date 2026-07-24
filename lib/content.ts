@@ -135,47 +135,48 @@ export const programs = [
 
 /* ------------------------------------------------------------------ */
 /* Believers Foundational Class                                        */
-/* TODO: replace the week outlines below with your real curriculum.    */
 /* ------------------------------------------------------------------ */
 
 export const bfc = {
   cohort: "Cohort 1.0",
   theme: "The Sent Generation",
   length: "Three weeks",
-  sessions: ["10:00 PM", "5:30 AM"],
-  venue: "Telegram",
-  startsOn: null as string | null,
+  sessions: ["9:30 PM", "5:30 AM"],
+  days: "Monday–Friday",
+  venue: "WhatsApp & Telegram",
+  startsOn: "July 2026" as string | null,
   intro:
     "Three weeks of intensive teaching for new and returning believers — laying the foundations of faith, prayer, and the Word before anything gets built on top of them.",
+  progression: "This progression takes a believer from “I am saved” → “I am growing” → “I am sent.”",
   weeks: [
     {
       label: "Week one",
-      title: "Salvation and assurance",
+      title: "Foundation of Salvation & Identity",
       topics: [
-        "What actually happened at the new birth",
-        "Repentance, faith, and grace",
-        "Assurance: how you know you are His",
-        "Baptism and the believer's first steps",
+        "The Gospel and Salvation",
+        "The New Birth Experience",
+        "The Holy Spirit and the Believer",
+        "Identity in Christ",
       ],
     },
     {
       label: "Week two",
-      title: "The Word and the life of prayer",
+      title: "Spiritual Growth & Discipline",
       topics: [
-        "Reading the Bible so it changes you",
-        "Building a prayer life that survives a busy week",
-        "The person and work of the Holy Spirit",
-        "Holiness as a lifestyle, not a performance",
+        "Understanding Prayer as a Key to Spiritual Growth",
+        "Understanding the Power of the Word",
+        "Worship, Fasting, and Fellowship",
+        "Dominion in Christ",
       ],
     },
     {
       label: "Week three",
-      title: "Sent",
+      title: "Purpose, Calling & Assignment",
       topics: [
-        "Identity: who you are before what you do",
-        "Your place in the local church",
-        "Witnessing where you already are",
-        "Carrying the Great Commission into your campus",
+        "The Man, The Call, The Assignment",
+        "Entering Your Calling Early",
+        "Living a Life of Impact and Finishing Well",
+        "Mountains of Influence",
       ],
     },
   ],
@@ -183,4 +184,16 @@ export const bfc = {
     title: "Weekly review, not an exam to fear",
     body: "Each week closes with a short review in the class portal. The result is not a grade — it tells the teaching team which foundation still needs strengthening before the cohort moves on.",
   },
+};
+
+/* The Visioneer / convener */
+export const visioneer = {
+  name: "Shepherd Sam",
+  role: "Visioneer & Convener",
+  image: "/shepherd-sam.jpg",
+  bio: [
+    "Shepherd Sam is a passionate lover of God and a devoted worship minister with a divine mandate to lead men into the throne room of God and see lives transformed through worship.",
+    "He is the convener of the annual meeting “Atmosphere of Worship and Praise,” a powerful gathering that draws over 400 participants seeking a deep encounter with God’s presence.",
+    "Alongside his team, The Shepherd’s Crew, he also runs a nationwide campus outreach tagged “Campus Invasion” — setting the hearts of teens and youths on fire for God, and helping them keep the fire burning long after their time on campus.",
+  ],
 };

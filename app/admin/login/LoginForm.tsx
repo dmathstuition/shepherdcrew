@@ -36,7 +36,7 @@ export function AdminLoginForm() {
   return (
     <form onSubmit={onSubmit} className="mt-10 space-y-4">
       <div>
-        <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.28em] text-white/50">
+        <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.28em] text-faint">
           Email
         </label>
         <input
@@ -45,11 +45,11 @@ export function AdminLoginForm() {
           type="email"
           autoComplete="email"
           required
-          className="w-full rounded-xl border border-white/15 bg-night/60 px-4 py-3.5 text-white outline-none transition-colors focus:border-gold"
+          className="w-full rounded-xl border border-line/20 bg-surface2 px-4 py-3.5 text-ink outline-none transition-colors focus:border-gold"
         />
       </div>
       <div>
-        <label htmlFor="password" className="mb-2 block text-xs uppercase tracking-[0.28em] text-white/50">
+        <label htmlFor="password" className="mb-2 block text-xs uppercase tracking-[0.28em] text-faint">
           Password
         </label>
         <input
@@ -58,7 +58,7 @@ export function AdminLoginForm() {
           type="password"
           autoComplete="current-password"
           required
-          className="w-full rounded-xl border border-white/15 bg-night/60 px-4 py-3.5 text-white outline-none transition-colors focus:border-gold"
+          className="w-full rounded-xl border border-line/20 bg-surface2 px-4 py-3.5 text-ink outline-none transition-colors focus:border-gold"
         />
       </div>
 

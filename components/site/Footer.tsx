@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-abyss py-16">
+    <footer className="border-t border-line/15 bg-surface py-16">
       <div className="mx-auto max-w-shell px-6 lg:px-10">
         <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
           <Link href="/" className="flex items-center gap-4">
@@ -21,18 +21,18 @@ export function Footer() {
               <span className="block font-display text-lg font-semibold leading-none tracking-wide">
                 The Shepherd&rsquo;s Crew
               </span>
-              <span className="mt-1.5 block text-xs uppercase tracking-[0.28em] text-white/35">
+              <span className="mt-1.5 block text-xs uppercase tracking-[0.28em] text-faint">
                 Est. {site.established} &middot; {site.scripture}
               </span>
             </span>
           </Link>
 
-          <p className="max-w-[40ch] text-sm text-white/45">
+          <p className="max-w-[40ch] text-sm text-faint">
             {site.pillars.join(" · ")}
           </p>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/30 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line/15 pt-8 text-xs text-faint sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

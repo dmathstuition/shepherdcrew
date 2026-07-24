@@ -4,6 +4,7 @@ import { JoinForm } from "@/components/site/JoinForm";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { MissionVision } from "@/components/sections/MissionVision";
+import { Visioneer } from "@/components/sections/Visioneer";
 import { Programs } from "@/components/sections/Programs";
 import { MjfGoals } from "@/components/sections/MjfGoals";
 import { Faith } from "@/components/sections/Faith";
@@ -18,6 +19,7 @@ export default function HomePage() {
         <Hero />
         <About />
         <MissionVision />
+        <Visioneer />
         <Programs />
         <MjfGoals />
         <Faith />

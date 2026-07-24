@@ -18,7 +18,7 @@ export function Programs() {
             <br />
             ONE MANDATE
           </h2>
-          <p className="mt-6 max-w-[60ch] text-white/55">
+          <p className="mt-6 max-w-[60ch] text-muted">
             An annual gathering, a foundational class, and a digital movement. Each one carries the
             same assignment into a different room.
           </p>
@@ -26,7 +26,7 @@ export function Programs() {
 
         {/* AOWAP — the flagship, given the largest treatment */}
         <Reveal delay={100}>
-          <article className="group relative mt-16 overflow-hidden rounded-3xl border border-white/10 bg-night">
+          <article className="group relative mt-16 overflow-hidden rounded-3xl border border-line/15 bg-surface2">
             <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
               <div className="relative min-h-[300px] overflow-hidden lg:min-h-[440px]">
                 <Image
@@ -36,7 +36,7 @@ export function Programs() {
                   sizes="(max-width: 1024px) 100vw, 55vw"
                   className="object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-midnight/70 via-transparent to-night" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
                 <span className="absolute left-6 top-6 rounded-full bg-ember px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-midnight">
                   8th Edition
                 </span>
@@ -51,10 +51,10 @@ export function Programs() {
                   <br />
                   WORSHIP &amp; PRAISE
                 </h3>
-                <p className="mt-3 text-sm uppercase tracking-[0.28em] text-white/40">
+                <p className="mt-3 text-sm uppercase tracking-[0.28em] text-faint">
                   Worship &middot; Revival &middot; Praise
                 </p>
-                <p className="mt-6 text-[17px] leading-[1.75] text-white/70">
+                <p className="mt-6 text-[17px] leading-[1.75] text-muted">
                   A God-saturated atmosphere where worship, praise, prayer, and the Word align to
                   usher people into encounters that lead to salvation, healing, revival, and deeper
                   intimacy with God.
@@ -73,7 +73,7 @@ export function Programs() {
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {/* Believers Foundational Class */}
           <Reveal delay={140}>
-            <article className="flex h-full flex-col rounded-3xl border border-white/10 bg-gradient-to-br from-deep to-night p-9 lg:p-11">
+            <article className="flex h-full flex-col rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:p-11">
               <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
                 {bfc.cohort} &middot; {bfc.length}
               </p>
@@ -85,16 +85,16 @@ export function Programs() {
               <p className="mt-3 text-sm font-semibold uppercase tracking-[0.2em] text-ember">
                 Theme: {bfc.theme}
               </p>
-              <p className="mt-6 flex-1 text-[17px] leading-[1.75] text-white/70">{bfc.intro}</p>
+              <p className="mt-6 flex-1 text-[17px] leading-[1.75] text-muted">{bfc.intro}</p>
 
-              <dl className="mt-8 grid grid-cols-2 gap-y-5 border-t border-white/10 pt-7 text-sm">
+              <dl className="mt-8 grid grid-cols-2 gap-y-5 border-t border-line/15 pt-7 text-sm">
                 <div>
-                  <dt className="text-white/40">Sessions</dt>
-                  <dd className="mt-1 font-semibold text-white">{bfc.sessions.join(" & ")}</dd>
+                  <dt className="text-faint">Sessions</dt>
+                  <dd className="mt-1 font-semibold text-ink">{bfc.sessions.join(" & ")}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/40">Venue</dt>
-                  <dd className="mt-1 font-semibold text-white">{bfc.venue}</dd>
+                  <dt className="text-faint">Venue</dt>
+                  <dd className="mt-1 font-semibold text-ink">{bfc.venue}</dd>
                 </div>
               </dl>
 
@@ -129,7 +129,7 @@ export function Programs() {
                 <br />
                 FAMOUS
               </h3>
-              <p className="mt-6 flex-1 text-[17px] leading-[1.75] text-white/70">
+              <p className="mt-6 flex-1 text-[17px] leading-[1.75] text-muted">
                 Raising teens and youths whose hearts burn for God — grounded in truth, bold in
                 faith, committed to living out the gospel in every area of life, and using digital
                 platforms to reach, teach, and transform lives globally.
@@ -146,20 +146,20 @@ export function Programs() {
 
         {/* Campus Invasion — the ongoing outreach arm */}
         <Reveal delay={280}>
-          <div className="mt-6 flex flex-col items-start gap-6 rounded-3xl border border-white/10 p-9 sm:flex-row sm:items-center sm:justify-between lg:p-11">
+          <div className="mt-6 flex flex-col items-start gap-6 rounded-3xl border border-line/15 p-9 sm:flex-row sm:items-center sm:justify-between lg:p-11">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
                 Ongoing outreach
               </p>
               <h3 className="mt-4 font-display text-3xl leading-none">CAMPUS INVASION</h3>
-              <p className="mt-4 max-w-[62ch] text-white/65">
+              <p className="mt-4 max-w-[62ch] text-muted">
                 Taking the Gospel directly to campuses — reaching students through worship,
                 preaching, and practical evangelism.
               </p>
             </div>
             <a
               href={`tel:${site.contacts[0].phone}`}
-              className="shrink-0 rounded-full border border-white/20 px-7 py-3 font-bold transition-colors hover:border-gold hover:text-gold"
+              className="shrink-0 rounded-full border border-line/25 px-7 py-3 font-bold transition-colors hover:border-gold hover:text-gold"
             >
               Bring us to your campus
             </a>
