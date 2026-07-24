@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
+import { getServiceClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
 /**
- * Receives registrations from the site and forwards them to your
- * Google Apps Script web app (set GOOGLE_SCRIPT_URL in .env).
+ * Receives registrations from the site and stores them in Supabase
+ * (table: public.registrations). Configure SUPABASE_URL and
+ * SUPABASE_SERVICE_ROLE_KEY in the environment; see supabase/migrations
+ * for the schema.
  *
- * When the class portal lands, swap the forward for a database insert
- * and create the member record in the same transaction.
+ * The insert uses the service-role client, so it runs server-side only and
+ * writes even though the table's Row Level Security blocks anonymous access.
  */
 
 const VALID_PROGRAMS = [
@@ -70,23 +73,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Choose a program." }, { status: 400 });
   }
 
-  const record = { name, phone, email, program, submittedAt: new Date().toISOString() };
+  const record = { full_name: name, phone, email, program, ip };
 
-  const endpoint = process.env.GOOGLE_SCRIPT_URL;
-  if (!endpoint) {
-    console.warn("GOOGLE_SCRIPT_URL is not set. Registration logged only:", record);
+  const supabase = getServiceClient();
+  if (!supabase) {
+    console.warn("Supabase is not configured. Registration logged only:", record);
     return NextResponse.json({ ok: true, stored: false });
   }
 
-  try {
-    const forwarded = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(record),
-    });
-    if (!forwarded.ok) throw new Error(`Upstream responded ${forwarded.status}`);
-  } catch (error) {
-    console.error("Registration forward failed:", error);
+  const { error } = await supabase.from("registrations").insert(record);
+  if (error) {
+    console.error("Registration insert failed:", error);
     return NextResponse.json({ error: "Could not save your details." }, { status: 502 });
   }
 
