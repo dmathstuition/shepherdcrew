@@ -1,4 +1,5 @@
-Drop assets here:
+On-brand PLACEHOLDER assets are currently committed here so the site deploys and
+renders with no broken images. Replace them with the real artwork below:
 
   logo-shepherds-crew.png   transparent background, square, 512px+
   logo-mjf.png              transparent background, square, 512px+
