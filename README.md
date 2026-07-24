@@ -63,8 +63,17 @@ Set up:
    `SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… PORTAL_SESSION_SECRET=… node scripts/seed-portal-demo.mjs`
    to mint a demo member and print a working access code. Log in at `/portal`.
 
-Creating real members and assessments currently happens via SQL / the Supabase
-Table Editor; an admin UI is the next build (see the architecture doc).
+### Admin
+
+Manage the portal at `/admin`. Create the first admin account:
+
+```
+SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… \
+  node scripts/seed-admin.mjs admin@yourchurch.org 'a-strong-password'
+```
+
+Then sign in at `/admin/login` to create cohorts, issue member access codes,
+build assessments and questions, and see per-topic analytics and results.
 
 ## Before launch — actual blockers
 
