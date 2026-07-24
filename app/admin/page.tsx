@@ -9,6 +9,9 @@ import {
   CreateAssessmentForm,
   CreateAdminForm,
   ToggleButton,
+  ConfirmButton,
+  RenameCohortForm,
+  ResetAdminPassword,
   LogoutButton,
 } from "./AdminForms";
 
@@ -68,6 +71,29 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
             ))}
           </div>
         )}
+        {cohorts.length > 0 && (
+          <div className="mt-6 divide-y divide-line/15 border-t border-line/15 pt-2">
+            {cohorts.map((c) => (
+              <div key={c.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
+                <div>
+                  <p className="font-semibold">{c.name}</p>
+                  {c.starts_on && <p className="text-xs text-faint">Starts {c.starts_on}</p>}
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <RenameCohortForm cohort={c} />
+                  <ConfirmButton
+                    url="/api/admin/cohorts"
+                    body={{ action: "delete", cohortId: c.id }}
+                    confirm={`Delete "${c.name}"? This permanently removes its members, assessments, questions, and all results.`}
+                  >
+                    Delete
+                  </ConfirmButton>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="mt-6 border-t border-line/15 pt-6">
           <CreateCohortForm />
         </div>
@@ -92,12 +118,21 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
                     </p>
                     {m.phone && <p className="text-xs text-faint">{m.phone}</p>}
                   </div>
-                  <ToggleButton
-                    url="/api/admin/members"
-                    body={{ action: m.revoked ? "restore" : "revoke", memberId: m.id }}
-                  >
-                    {m.revoked ? "Restore" : "Revoke"}
-                  </ToggleButton>
+                  <div className="flex items-center gap-2">
+                    <ToggleButton
+                      url="/api/admin/members"
+                      body={{ action: m.revoked ? "restore" : "revoke", memberId: m.id }}
+                    >
+                      {m.revoked ? "Restore" : "Revoke"}
+                    </ToggleButton>
+                    <ConfirmButton
+                      url="/api/admin/members"
+                      body={{ action: "delete", memberId: m.id }}
+                      confirm={`Delete ${m.full_name} and their attempts? Their access code stops working.`}
+                    >
+                      Delete
+                    </ConfirmButton>
+                  </div>
                 </div>
               ))}
             </div>
@@ -137,6 +172,13 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
                     >
                       Open
                     </Link>
+                    <ConfirmButton
+                      url="/api/admin/assessments"
+                      body={{ action: "delete", assessmentId: a.id }}
+                      confirm={`Delete "${a.title}" and its questions and results?`}
+                    >
+                      Delete
+                    </ConfirmButton>
                   </div>
                 </div>
               ))}
@@ -161,13 +203,20 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
                 </p>
                 <p className="text-xs text-faint">{a.role}</p>
               </div>
-              {a.id !== admin.id && admins.length > 1 ? (
-                <ToggleButton url="/api/admin/admins" body={{ action: "delete", adminId: a.id }}>
-                  Remove
-                </ToggleButton>
-              ) : (
-                <span className="text-xs text-faint">{admins.length <= 1 ? "last admin" : "—"}</span>
-              )}
+              <div className="flex flex-wrap items-center gap-2">
+                <ResetAdminPassword adminId={a.id} />
+                {a.id !== admin.id && admins.length > 1 ? (
+                  <ConfirmButton
+                    url="/api/admin/admins"
+                    body={{ action: "delete", adminId: a.id }}
+                    confirm={`Remove admin ${a.email}?`}
+                  >
+                    Remove
+                  </ConfirmButton>
+                ) : (
+                  <span className="text-xs text-faint">{admins.length <= 1 ? "last admin" : "you"}</span>
+                )}
+              </div>
             </div>
           ))}
         </div>

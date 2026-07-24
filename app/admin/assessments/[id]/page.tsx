@@ -9,7 +9,7 @@ import {
   getTopicAnalytics,
 } from "@/lib/admin";
 import { AddQuestionForm, QuestionsAdmin, EditAssessmentForm } from "./QuestionForm";
-import { ToggleButton } from "../../AdminForms";
+import { ToggleButton, ConfirmButton } from "../../AdminForms";
 
 export const metadata: Metadata = {
   title: "Assessment",
@@ -61,7 +61,7 @@ export default async function AssessmentAdmin({ params }: { params: { id: string
             {assessment.is_published ? "published" : "draft"}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <EditAssessmentForm assessment={assessment} />
           <ToggleButton
             url="/api/admin/assessments"
@@ -69,6 +69,14 @@ export default async function AssessmentAdmin({ params }: { params: { id: string
           >
             {assessment.is_published ? "Unpublish" : "Publish"}
           </ToggleButton>
+          <ConfirmButton
+            url="/api/admin/assessments"
+            body={{ action: "delete", assessmentId: assessment.id }}
+            confirm={`Delete "${assessment.title}" and its questions and results?`}
+            redirectTo="/admin"
+          >
+            Delete
+          </ConfirmButton>
         </div>
       </header>
 

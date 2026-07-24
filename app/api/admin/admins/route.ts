@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/current-admin";
-import { createAdmin, deleteAdmin, countAdmins } from "@/lib/admin";
+import { createAdmin, deleteAdmin, countAdmins, resetAdminPassword } from "@/lib/admin";
 
 export const runtime = "nodejs";
 
@@ -24,6 +24,18 @@ export async function POST(request: Request) {
     }
     try {
       await deleteAdmin(id);
+    } catch (error) {
+      return NextResponse.json({ error: (error as Error).message }, { status: 400 });
+    }
+    return NextResponse.json({ ok: true });
+  }
+
+  if (payload.action === "reset") {
+    const id = String(payload.adminId ?? "");
+    const password = String(payload.password ?? "");
+    if (!id) return NextResponse.json({ error: "Missing admin." }, { status: 400 });
+    try {
+      await resetAdminPassword(id, password);
     } catch (error) {
       return NextResponse.json({ error: (error as Error).message }, { status: 400 });
     }
