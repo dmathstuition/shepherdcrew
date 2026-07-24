@@ -46,6 +46,26 @@ Registrations from the "Join a program" form are stored in Supabase.
 
 Until these are set, `/api/join` validates submissions and returns `{ ok: true, stored: false }` (logged, not stored) instead of failing. To view registrations, use the dashboard **Table Editor** or query with the service role.
 
+## Class portal (CBT)
+
+A secured computer-based-testing portal for class members lives under `/portal`.
+Members log in with an **access code** (no passwords); exams are timed and scored
+**entirely server-side**, and the answer key is never sent to the browser. See
+`docs/portal-architecture.md` for the full design.
+
+Set up:
+
+1. Apply `supabase/migrations/` (schema + Row Level Security).
+2. Set `PORTAL_SESSION_SECRET` (a long random string — see `.env.example`) in
+   addition to the Supabase vars. It signs session cookies **and** hashes access
+   codes, so keep it stable — changing it invalidates every session and code.
+3. (Optional demo) run `supabase/seed.sql` for a sample assessment, then
+   `SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… PORTAL_SESSION_SECRET=… node scripts/seed-portal-demo.mjs`
+   to mint a demo member and print a working access code. Log in at `/portal`.
+
+Creating real members and assessments currently happens via SQL / the Supabase
+Table Editor; an admin UI is the next build (see the architecture doc).
+
 ## Before launch — actual blockers
 
 1. **Supabase env vars are unset**, so `/api/join` accepts submissions and drops them (logs only). Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` and run the migration.

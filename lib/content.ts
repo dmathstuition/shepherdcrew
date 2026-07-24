@@ -73,6 +73,46 @@ export const gallery = [
   { src: "/gallery/worship-06.jpg", alt: "The Shepherd's Crew team after the service" },
 ];
 
+/**
+ * Testimonies shared after Outpouring 2025 — displayed as the original
+ * screenshots for authenticity. `quote` is a short transcription used as the
+ * accessible label and search text; `caption` is the visible attribution.
+ */
+export const testimonies = [
+  {
+    src: "/testimonies/testimony-01.jpg",
+    width: 828,
+    height: 864,
+    caption: "Outpouring 2025",
+    quote:
+      "The outpouring wasn't just a program, it was a divine encounter. I felt seen, healed and held by God. I came in expectant and left transformed.",
+  },
+  {
+    src: "/testimonies/testimony-04.jpg",
+    width: 828,
+    height: 804,
+    caption: "Outpouring 2025",
+    quote:
+      "Yahweh be glorified — Outpouring 2025 was fire. The level of the Holy Ghost we carry will determine the level we pour out.",
+  },
+  {
+    src: "/testimonies/testimony-02.jpg",
+    width: 814,
+    height: 546,
+    caption: "Outpouring 2025",
+    quote:
+      "My experience was second to none. The programme really unlocked something in me. Prayer is a must!",
+  },
+  {
+    src: "/testimonies/testimony-03.jpg",
+    width: 717,
+    height: 583,
+    caption: "Outpouring 2025",
+    quote:
+      "Truly, I was deeply blessed. The teaching was so deep and timely — it spoke to my heart. Thank you for organizing such a powerful program.",
+  },
+];
+
 export const programs = [
   "Atmosphere of Worship & Praise (AOWAP)",
   "Believers Foundational Class",

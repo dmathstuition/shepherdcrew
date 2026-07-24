@@ -8,6 +8,7 @@ import { Programs } from "@/components/sections/Programs";
 import { MjfGoals } from "@/components/sections/MjfGoals";
 import { Faith } from "@/components/sections/Faith";
 import { Gallery } from "@/components/sections/Gallery";
+import { Testimonies } from "@/components/sections/Testimonies";
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
         <MjfGoals />
         <Faith />
         <Gallery />
+        <Testimonies />
         <JoinForm />
       </main>
       <Footer />
