@@ -14,7 +14,7 @@ export function PastPrograms() {
           <h2 className="max-w-[18ch] font-display text-[clamp(2.2rem,5.5vw,4.2rem)] font-semibold leading-[1.02]">
             Programs we have held
           </h2>
-          <p className="mt-6 max-w-[58ch] text-mist/55">
+          <p className="mt-6 max-w-[58ch] text-muted">
             A look back at the gatherings God has used to restore, revive, and raise a generation.
           </p>
         </Reveal>
@@ -31,11 +31,11 @@ export function PastPrograms() {
                     <h3 className="mt-3 font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold italic leading-none">
                       {program.name}
                     </h3>
-                    <p className="mt-3 text-sm uppercase tracking-[0.24em] text-mist/45">
+                    <p className="mt-3 text-sm uppercase tracking-[0.24em] text-faint">
                       {program.edition}
                     </p>
                   </div>
-                  <p className="max-w-[42ch] text-mist/60">{program.blurb}</p>
+                  <p className="max-w-[42ch] text-muted">{program.blurb}</p>
                 </div>
 
                 {/* Photo gallery — first tile featured, the rest an even grid */}
@@ -43,7 +43,7 @@ export function PastPrograms() {
                   {program.images.map((img, i) => (
                     <figure
                       key={img.src}
-                      className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-deep ${
+                      className={`group relative overflow-hidden rounded-2xl border border-line/15 bg-surface ${
                         i === 0 ? "col-span-2 lg:col-span-2 lg:row-span-2" : ""
                       }`}
                     >

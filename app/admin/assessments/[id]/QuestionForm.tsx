@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const input =
-  "w-full rounded-lg border border-white/15 bg-night/60 px-3.5 py-2.5 text-sm text-white outline-none transition-colors focus:border-gold";
-const label = "mb-1.5 block text-[11px] uppercase tracking-[0.22em] text-white/45";
+  "w-full rounded-lg border border-line/20 bg-surface2 px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold";
+const label = "mb-1.5 block text-[11px] uppercase tracking-[0.22em] text-faint";
 
 export function AddQuestionForm({ assessmentId }: { assessmentId: string }) {
   const router = useRouter();
@@ -60,7 +60,7 @@ export function AddQuestionForm({ assessmentId }: { assessmentId: string }) {
               className="h-4 w-4 accent-[#C6A24C]"
               aria-label={`Mark option ${String.fromCharCode(65 + i)} correct`}
             />
-            <span className="w-5 font-mono text-xs text-white/40">{String.fromCharCode(65 + i)}</span>
+            <span className="w-5 font-mono text-xs text-faint">{String.fromCharCode(65 + i)}</span>
             <input
               value={opt}
               onChange={(e) => setOption(i, e.target.value)}

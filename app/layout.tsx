@@ -35,10 +35,16 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
 };
 
+// Runs before paint: applies the saved theme (light is the default).
+const themeScript = `(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {children}
+      </body>
     </html>
   );
 }

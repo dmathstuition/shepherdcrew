@@ -31,14 +31,7 @@ export function JoinForm({ defaultProgram }: { defaultProgram?: string }) {
 
   return (
     <section id="join" className="band">
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-[70%]"
-        style={{
-          background:
-            "radial-gradient(90% 100% at 50% 100%, rgba(242,106,33,0.18) 0%, rgba(7,11,30,0) 70%)",
-        }}
-      />
+      <div aria-hidden className="hero-aura absolute inset-x-0 bottom-0 h-[70%]" />
       <div className="relative mx-auto max-w-[820px] px-6 text-center">
         <Reveal>
           <Eyebrow>Join us</Eyebrow>
@@ -47,7 +40,7 @@ export function JoinForm({ defaultProgram }: { defaultProgram?: string }) {
             <br />
             FOR YOU HERE
           </h2>
-          <p className="mx-auto mt-6 max-w-[52ch] text-white/60">
+          <p className="mx-auto mt-6 max-w-[52ch] text-muted">
             Tell us which program you want to join. Someone from the team will reach you with the
             next steps.
           </p>
@@ -79,7 +72,7 @@ export function JoinForm({ defaultProgram }: { defaultProgram?: string }) {
               <div>
                 <label
                   htmlFor="program"
-                  className="mb-2 block text-[11px] font-bold uppercase tracking-[0.28em] text-white/45"
+                  className="mb-2 block text-[11px] font-bold uppercase tracking-[0.28em] text-faint"
                 >
                   Program
                 </label>
@@ -88,7 +81,7 @@ export function JoinForm({ defaultProgram }: { defaultProgram?: string }) {
                   name="program"
                   required
                   defaultValue={defaultProgram ?? ""}
-                  className="w-full rounded-xl border border-white/15 bg-night px-5 py-4 text-white transition-colors focus:border-ember"
+                  className="w-full rounded-xl border border-line/20 bg-surface2 px-5 py-4 text-ink transition-colors focus:border-ember"
                 >
                   <option value="">Choose one</option>
                   {programs.map((p) => (
@@ -134,7 +127,7 @@ function Field({
     <div>
       <label
         htmlFor={name}
-        className="mb-2 block text-[11px] font-bold uppercase tracking-[0.28em] text-white/45"
+        className="mb-2 block text-[11px] font-bold uppercase tracking-[0.28em] text-faint"
       >
         {label}
       </label>
@@ -144,7 +137,7 @@ function Field({
         type={type}
         required
         autoComplete={autoComplete}
-        className="w-full rounded-xl border border-white/15 bg-night px-5 py-4 text-white placeholder-white/30 transition-colors focus:border-ember"
+        className="w-full rounded-xl border border-line/20 bg-surface2 px-5 py-4 text-ink placeholder-faint transition-colors focus:border-ember"
       />
     </div>
   );

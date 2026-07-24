@@ -12,7 +12,7 @@ export function LogoutButton() {
   return (
     <button
       onClick={logout}
-      className="text-xs uppercase tracking-[0.28em] text-white/50 transition-colors hover:text-gold"
+      className="text-xs uppercase tracking-[0.28em] text-faint transition-colors hover:text-gold"
     >
       Sign out
     </button>

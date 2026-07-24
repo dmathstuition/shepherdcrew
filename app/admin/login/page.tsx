@@ -24,7 +24,7 @@ export default async function AdminLoginPage() {
           The Shepherd&rsquo;s Crew
         </p>
         <h1 className="mt-3 text-center font-display text-4xl font-semibold leading-none">Admin</h1>
-        <p className="mt-4 text-center text-mist/55">Sign in to manage the class portal.</p>
+        <p className="mt-4 text-center text-muted">Sign in to manage the class portal.</p>
         <AdminLoginForm />
       </div>
     </main>

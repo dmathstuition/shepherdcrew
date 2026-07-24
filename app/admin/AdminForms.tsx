@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const input =
-  "w-full rounded-lg border border-white/15 bg-night/60 px-3.5 py-2.5 text-sm text-white outline-none transition-colors focus:border-gold";
-const label = "mb-1.5 block text-[11px] uppercase tracking-[0.22em] text-white/45";
+  "w-full rounded-lg border border-line/20 bg-surface2 px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold";
+const label = "mb-1.5 block text-[11px] uppercase tracking-[0.22em] text-faint";
 const btn =
   "rounded-full bg-ember px-5 py-2.5 text-sm font-bold text-midnight transition-transform hover:-translate-y-0.5 disabled:opacity-60";
 
@@ -28,7 +28,7 @@ export function LogoutButton() {
         router.push("/admin/login");
         router.refresh();
       }}
-      className="text-xs uppercase tracking-[0.28em] text-white/50 transition-colors hover:text-gold"
+      className="text-xs uppercase tracking-[0.28em] text-faint transition-colors hover:text-gold"
     >
       Sign out
     </button>
@@ -141,11 +141,11 @@ export function CreateMemberForm({ cohorts }: { cohorts: { id: string; name: str
       {issued && (
         <div className="mt-4 rounded-xl border border-gold/40 bg-gold/[0.08] p-4">
           <p className="text-xs uppercase tracking-[0.22em] text-gold">Access code — shown once</p>
-          <p className="mt-2 text-sm text-mist/70">
-            Give <span className="font-semibold text-white">{issued.name}</span> this code. It cannot be
+          <p className="mt-2 text-sm text-ink/70">
+            Give <span className="font-semibold text-ink">{issued.name}</span> this code. It cannot be
             shown again (only reset).
           </p>
-          <p className="mt-2 select-all font-mono text-2xl tracking-widest text-white">{issued.code}</p>
+          <p className="mt-2 select-all font-mono text-2xl tracking-widest text-ink">{issued.code}</p>
         </div>
       )}
     </div>
@@ -237,7 +237,7 @@ export function ToggleButton({
         setLoading(false);
         router.refresh();
       }}
-      className="rounded-full border border-white/20 px-4 py-1.5 text-xs font-bold transition-colors hover:border-gold hover:text-gold disabled:opacity-50"
+      className="rounded-full border border-line/25 px-4 py-1.5 text-xs font-bold transition-colors hover:border-gold hover:text-gold disabled:opacity-50"
     >
       {children}
     </button>

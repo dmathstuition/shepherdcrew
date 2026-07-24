@@ -98,7 +98,7 @@ export function ExamRunner({
 
   if (total === 0) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-2xl items-center justify-center px-6 text-center text-white/60">
+      <main className="mx-auto flex min-h-screen max-w-2xl items-center justify-center px-6 text-center text-muted">
         This assessment has no questions yet.
       </main>
     );
@@ -107,19 +107,19 @@ export function ExamRunner({
   return (
     <main className="mx-auto min-h-screen w-full max-w-2xl px-6 py-12">
       {/* Sticky header: title, timer, progress */}
-      <header className="sticky top-0 z-10 -mx-6 mb-8 border-b border-white/10 bg-midnight/90 px-6 py-4 backdrop-blur-md">
+      <header className="sticky top-0 z-10 -mx-6 mb-8 border-b border-line/15 bg-canvas/85 px-6 py-4 backdrop-blur-md">
         <div className="flex items-center justify-between gap-4">
           <p className="truncate text-sm font-semibold">{title}</p>
           <div
             className={`rounded-full px-3 py-1 font-mono text-sm tabular-nums ${
-              low ? "bg-ember/20 text-ember" : "bg-white/10 text-white/80"
+              low ? "bg-ember/20 text-ember" : "bg-ink/10 text-muted"
             }`}
             aria-live="polite"
           >
             {mm}:{ss.toString().padStart(2, "0")}
           </div>
         </div>
-        <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/10">
+        <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-ink/10">
           <div
             className="h-full bg-ember transition-all"
             style={{ width: `${(answeredCount / total) * 100}%` }}
@@ -129,7 +129,7 @@ export function ExamRunner({
 
       {/* Question */}
       <div>
-        <p className="text-xs uppercase tracking-[0.28em] text-white/40">
+        <p className="text-xs uppercase tracking-[0.28em] text-faint">
           Question {index + 1} of {total}
         </p>
         <h2 className="mt-3 text-xl font-semibold leading-snug">{current.stem}</h2>
@@ -143,13 +143,13 @@ export function ExamRunner({
                 onClick={() => choose(current.id, i)}
                 className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-colors ${
                   selected
-                    ? "border-gold bg-gold/10 text-white"
-                    : "border-white/15 bg-night/40 text-white/80 hover:border-white/30"
+                    ? "border-gold bg-gold/10 text-ink"
+                    : "border-line/20 bg-surface2 text-muted hover:border-line/30"
                 }`}
               >
                 <span
                   className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border text-xs font-bold ${
-                    selected ? "border-gold bg-gold text-midnight" : "border-white/30 text-white/50"
+                    selected ? "border-gold bg-gold text-midnight" : "border-line/30 text-faint"
                   }`}
                 >
                   {String.fromCharCode(65 + i)}
@@ -166,11 +166,11 @@ export function ExamRunner({
         <button
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
           disabled={index === 0}
-          className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-bold transition-colors hover:border-white/40 disabled:opacity-40"
+          className="rounded-full border border-line/25 px-5 py-2.5 text-sm font-bold transition-colors hover:border-line/40 disabled:opacity-40"
         >
           Previous
         </button>
-        <span className="text-xs text-white/40" aria-live="polite">
+        <span className="text-xs text-faint" aria-live="polite">
           {saveState === "saving" && "Saving…"}
           {saveState === "saved" && "Saved"}
           {saveState === "error" && "Save failed — retrying on next tap"}
@@ -178,7 +178,7 @@ export function ExamRunner({
         {index < total - 1 ? (
           <button
             onClick={() => setIndex((i) => Math.min(total - 1, i + 1))}
-            className="rounded-full bg-white/10 px-5 py-2.5 text-sm font-bold transition-colors hover:bg-white/20"
+            className="rounded-full bg-ink/10 px-5 py-2.5 text-sm font-bold transition-colors hover:bg-ink/15"
           >
             Next
           </button>
@@ -206,8 +206,8 @@ export function ExamRunner({
                 i === index
                   ? "bg-gold text-midnight"
                   : done
-                    ? "bg-ember/30 text-white"
-                    : "bg-white/10 text-white/50 hover:bg-white/20"
+                    ? "bg-ember/30 text-ink"
+                    : "bg-ink/10 text-faint hover:bg-ink/15"
               }`}
             >
               {i + 1}
@@ -216,7 +216,7 @@ export function ExamRunner({
         })}
       </div>
 
-      <p className="mt-6 text-center text-xs text-white/35">
+      <p className="mt-6 text-center text-xs text-faint">
         {answeredCount} of {total} answered · your answers save automatically
       </p>
     </main>

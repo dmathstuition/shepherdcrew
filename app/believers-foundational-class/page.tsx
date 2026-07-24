@@ -22,14 +22,7 @@ export default function BfcPage() {
       <main>
         {/* ---------------------------------------------------------- */}
         <section className="relative overflow-hidden pb-24 pt-40 lg:pb-32 lg:pt-48">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(90% 60% at 20% 0%, rgba(198,162,76,0.14) 0%, rgba(7,12,26,0) 60%), radial-gradient(80% 60% at 90% 20%, rgba(37,64,124,0.30) 0%, rgba(7,12,26,0) 60%)",
-            }}
-          />
+          <div aria-hidden className="hero-aura absolute inset-0" />
           <div className="relative shell">
             <Reveal>
               <div className="flex items-center gap-4">
@@ -59,13 +52,13 @@ export default function BfcPage() {
             </Reveal>
 
             <Reveal delay={180}>
-              <p className="mt-8 max-w-[58ch] text-lg leading-relaxed text-white/65">{bfc.intro}</p>
+              <p className="mt-8 max-w-[58ch] text-lg leading-relaxed text-muted">{bfc.intro}</p>
             </Reveal>
 
             <Reveal delay={260}>
-              <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+              <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-ink/10 sm:grid-cols-2 lg:grid-cols-4">
                 <Stat label="Theme" value={bfc.theme} accent />
-                <Stat label="Sessions" value={bfc.sessions.join(" & ")} />
+                <Stat label="Sessions" value={`${bfc.sessions.join(" & ")} · ${bfc.days}`} />
                 <Stat label="Venue" value={bfc.venue} />
                 <Stat label="Length" value={bfc.length} />
               </dl>
@@ -81,12 +74,12 @@ export default function BfcPage() {
                 </Link>
                 <Link
                   href="/portal"
-                  className="rounded-full border border-white/20 px-9 py-4 text-center font-bold transition-colors hover:border-gold hover:text-gold"
+                  className="rounded-full border border-line/25 px-9 py-4 text-center font-bold transition-colors hover:border-gold hover:text-gold"
                 >
                   Enter the class portal
                 </Link>
               </div>
-              <p className="mt-4 text-sm text-white/40">
+              <p className="mt-4 text-sm text-faint">
                 Already enrolled? Use the access code sent to you when you joined.
               </p>
             </Reveal>
@@ -102,7 +95,7 @@ export default function BfcPage() {
               <h2 className="max-w-[20ch] font-display text-[clamp(2.2rem,5.2vw,4rem)] leading-[0.92]">
                 WHAT WE COVER, IN ORDER
               </h2>
-              <p className="mt-6 max-w-[60ch] text-white/55">
+              <p className="mt-6 max-w-[60ch] text-muted">
                 The order matters. Nothing in week three stands without week one underneath it.
               </p>
             </Reveal>
@@ -110,7 +103,7 @@ export default function BfcPage() {
             <ol className="mt-14 space-y-6">
               {bfc.weeks.map((week, i) => (
                 <Reveal key={week.label} delay={i * 90}>
-                  <li className="grid gap-8 rounded-3xl border border-white/10 bg-gradient-to-br from-deep to-night p-9 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+                  <li className="grid gap-8 rounded-3xl border border-line/15 bg-gradient-to-br from-surface to-surface2 p-9 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
                     <div>
                       <p className="font-display text-5xl leading-none text-ember/60">
                         {String(i + 1).padStart(2, "0")}
@@ -122,9 +115,9 @@ export default function BfcPage() {
                         {week.title}
                       </h3>
                     </div>
-                    <ul className="space-y-4 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                    <ul className="space-y-4 border-t border-line/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
                       {week.topics.map((topic) => (
-                        <li key={topic} className="flex gap-4 text-[17px] leading-[1.6] text-white/70">
+                        <li key={topic} className="flex gap-4 text-[17px] leading-[1.6] text-muted">
                           <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" />
                           {topic}
                         </li>
@@ -135,13 +128,19 @@ export default function BfcPage() {
               ))}
             </ol>
 
+            <Reveal delay={250}>
+              <p className="mt-10 text-center font-display text-xl italic leading-relaxed text-muted lg:text-2xl">
+                {bfc.progression}
+              </p>
+            </Reveal>
+
             <Reveal delay={300}>
-              <div className="mt-6 rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-12">
+              <div className="mt-8 rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-12">
                 <Eyebrow>Assessment</Eyebrow>
                 <h3 className="font-display text-2xl leading-[1.1] lg:text-3xl">
                   {bfc.assessment.title}
                 </h3>
-                <p className="mt-5 max-w-[70ch] text-[17px] leading-[1.75] text-white/70">
+                <p className="mt-5 max-w-[70ch] text-[17px] leading-[1.75] text-muted">
                   {bfc.assessment.body}
                 </p>
               </div>
@@ -177,7 +176,7 @@ export default function BfcPage() {
                   ].map((line) => (
                     <li
                       key={line}
-                      className="border-b border-white/10 pb-6 text-[17px] leading-[1.7] text-white/70 last:border-0"
+                      className="border-b border-line/15 pb-6 text-[17px] leading-[1.7] text-muted last:border-0"
                     >
                       {line}
                     </li>
@@ -192,12 +191,12 @@ export default function BfcPage() {
         <section id="enrol" className="band">
           <div className="shell">
             <Reveal>
-              <div className="rounded-3xl border border-white/10 p-9 text-center lg:p-14">
+              <div className="rounded-3xl border border-line/15 p-9 text-center lg:p-14">
                 <Eyebrow>Registration</Eyebrow>
                 <h2 className="font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[0.94]">
                   TALK TO THE TEAM
                 </h2>
-                <p className="mx-auto mt-6 max-w-[52ch] text-white/60">
+                <p className="mx-auto mt-6 max-w-[52ch] text-muted">
                   Send your details below, or reach either coordinator directly.
                 </p>
                 <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -205,7 +204,7 @@ export default function BfcPage() {
                     <a
                       key={c.phone}
                       href={`tel:${c.phone}`}
-                      className="rounded-full border border-white/20 px-7 py-3 font-bold transition-colors hover:border-gold hover:text-gold"
+                      className="rounded-full border border-line/25 px-7 py-3 font-bold transition-colors hover:border-gold hover:text-gold"
                     >
                       {c.name} &middot; {c.phone}
                     </a>
@@ -225,9 +224,9 @@ export default function BfcPage() {
 
 function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
-    <div className={`p-7 ${accent ? "bg-ember/10" : "bg-midnight"}`}>
-      <dt className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/40">{label}</dt>
-      <dd className={`mt-3 font-display text-xl leading-tight ${accent ? "text-gold" : "text-white"}`}>
+    <div className={`p-7 ${accent ? "bg-ember/10" : "bg-surface"}`}>
+      <dt className="text-[11px] font-bold uppercase tracking-[0.3em] text-faint">{label}</dt>
+      <dd className={`mt-3 font-display text-xl leading-tight ${accent ? "text-gold" : "text-ink"}`}>
         {value}
       </dd>
     </div>

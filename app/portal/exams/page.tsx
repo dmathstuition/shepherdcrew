@@ -34,7 +34,7 @@ export default async function ExamsPage() {
 
       <section className="mt-12 space-y-4">
         {assessments.length === 0 && (
-          <p className="rounded-2xl border border-white/10 bg-deep/50 px-6 py-8 text-center text-white/55">
+          <p className="rounded-2xl border border-line/15 bg-surface px-6 py-8 text-center text-muted">
             No assessments have been published for your cohort yet. Check back when your coordinator opens one.
           </p>
         )}
@@ -44,14 +44,14 @@ export default async function ExamsPage() {
           return (
             <article
               key={a.id}
-              className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-deep/50 px-6 py-5"
+              className="flex items-center justify-between gap-4 rounded-2xl border border-line/15 bg-surface px-6 py-5"
             >
               <div>
                 {a.week_number != null && (
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/40">Week {a.week_number}</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-faint">Week {a.week_number}</p>
                 )}
                 <h2 className="mt-1 font-semibold">{a.title}</h2>
-                <p className="mt-1 text-sm text-white/45">
+                <p className="mt-1 text-sm text-faint">
                   {a.duration_minutes} min
                   {submitted && a.attempt
                     ? ` · scored ${a.attempt.score}/${a.attempt.total}`
@@ -66,7 +66,7 @@ export default async function ExamsPage() {
               {submitted && a.attempt ? (
                 <Link
                   href={`/portal/result/${a.attempt.id}`}
-                  className="shrink-0 rounded-full border border-white/20 px-5 py-2.5 text-sm font-bold transition-colors hover:border-gold hover:text-gold"
+                  className="shrink-0 rounded-full border border-line/25 px-5 py-2.5 text-sm font-bold transition-colors hover:border-gold hover:text-gold"
                 >
                   View result
                 </Link>
@@ -78,7 +78,7 @@ export default async function ExamsPage() {
                   {a.attempt ? "Continue" : "Start"}
                 </Link>
               ) : (
-                <span className="shrink-0 text-sm text-white/35">Locked</span>
+                <span className="shrink-0 text-sm text-faint">Locked</span>
               )}
             </article>
           );

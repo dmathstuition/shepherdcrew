@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const card = "rounded-2xl border border-white/10 bg-deep/50 p-6 lg:p-8";
+const card = "rounded-2xl border border-line/15 bg-surface p-6 lg:p-8";
 const h2 = "font-display text-2xl font-semibold";
 
 export default async function AdminDashboard({ searchParams }: { searchParams: { cohort?: string } }) {
@@ -36,7 +36,7 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
           <h1 className="mt-2 font-display text-3xl font-semibold leading-none">Admin</h1>
         </div>
         <div className="flex items-center gap-5">
-          <span className="hidden text-sm text-white/45 sm:block">{admin.email}</span>
+          <span className="hidden text-sm text-faint sm:block">{admin.email}</span>
           <LogoutButton />
         </div>
       </header>
@@ -51,7 +51,7 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
                 key={c.id}
                 href={`/admin?cohort=${c.id}`}
                 className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
-                  c.id === selectedId ? "bg-ember text-midnight" : "border border-white/20 text-white/70 hover:border-gold"
+                  c.id === selectedId ? "bg-ember text-midnight" : "border border-line/25 text-muted hover:border-gold"
                 }`}
               >
                 {c.name}
@@ -59,13 +59,13 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
             ))}
           </div>
         )}
-        <div className="mt-6 border-t border-white/10 pt-6">
+        <div className="mt-6 border-t border-line/15 pt-6">
           <CreateCohortForm />
         </div>
       </section>
 
       {!selectedId ? (
-        <p className="mt-8 text-center text-white/50">Create your first cohort to begin.</p>
+        <p className="mt-8 text-center text-faint">Create your first cohort to begin.</p>
       ) : (
         <>
           {/* Members */}
@@ -73,15 +73,15 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
             <h2 className={h2}>Members</h2>
             <div className="mt-6"><CreateMemberForm cohorts={cohorts} /></div>
 
-            <div className="mt-8 divide-y divide-white/10">
-              {members.length === 0 && <p className="text-sm text-white/45">No members yet.</p>}
+            <div className="mt-8 divide-y divide-line/15">
+              {members.length === 0 && <p className="text-sm text-faint">No members yet.</p>}
               {members.map((m) => (
                 <div key={m.id} className="flex items-center justify-between gap-4 py-3">
                   <div>
-                    <p className={`font-semibold ${m.revoked ? "text-white/40 line-through" : "text-white"}`}>
+                    <p className={`font-semibold ${m.revoked ? "text-faint line-through" : "text-ink"}`}>
                       {m.full_name}
                     </p>
-                    {m.phone && <p className="text-xs text-white/40">{m.phone}</p>}
+                    {m.phone && <p className="text-xs text-faint">{m.phone}</p>}
                   </div>
                   <ToggleButton
                     url="/api/admin/members"
@@ -100,18 +100,18 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
             <div className="mt-6"><CreateAssessmentForm cohorts={cohorts} /></div>
 
             <div className="mt-8 space-y-3">
-              {assessments.length === 0 && <p className="text-sm text-white/45">No assessments yet.</p>}
+              {assessments.length === 0 && <p className="text-sm text-faint">No assessments yet.</p>}
               {assessments.map((a) => (
                 <div
                   key={a.id}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-night/40 px-4 py-3"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line/15 bg-surface2 px-4 py-3"
                 >
                   <div>
                     <p className="font-semibold">
-                      {a.week_number != null && <span className="text-white/45">Week {a.week_number} · </span>}
+                      {a.week_number != null && <span className="text-faint">Week {a.week_number} · </span>}
                       {a.title}
                     </p>
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-faint">
                       {a.duration_minutes} min · {a.is_published ? "published" : "draft"}
                     </p>
                   </div>
@@ -124,7 +124,7 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
                     </ToggleButton>
                     <Link
                       href={`/admin/assessments/${a.id}`}
-                      className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold transition-colors hover:bg-white/20"
+                      className="rounded-full bg-ink/10 px-4 py-1.5 text-xs font-bold transition-colors hover:bg-ink/15"
                     >
                       Open
                     </Link>

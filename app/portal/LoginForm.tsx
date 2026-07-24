@@ -39,7 +39,7 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="mt-10 space-y-4">
       <div>
-        <label htmlFor="fullName" className="mb-2 block text-xs uppercase tracking-[0.28em] text-white/50">
+        <label htmlFor="fullName" className="mb-2 block text-xs uppercase tracking-[0.28em] text-faint">
           Full name
         </label>
         <input
@@ -47,11 +47,11 @@ export function LoginForm() {
           name="fullName"
           autoComplete="name"
           required
-          className="w-full rounded-xl border border-white/15 bg-night/60 px-4 py-3.5 text-white outline-none transition-colors focus:border-gold"
+          className="w-full rounded-xl border border-line/20 bg-surface2 px-4 py-3.5 text-ink outline-none transition-colors focus:border-gold"
         />
       </div>
       <div>
-        <label htmlFor="code" className="mb-2 block text-xs uppercase tracking-[0.28em] text-white/50">
+        <label htmlFor="code" className="mb-2 block text-xs uppercase tracking-[0.28em] text-faint">
           Access code
         </label>
         <input
@@ -61,7 +61,7 @@ export function LoginForm() {
           autoCapitalize="characters"
           spellCheck={false}
           placeholder="BFC-7K4Q-2M"
-          className="w-full rounded-xl border border-white/15 bg-night/60 px-4 py-3.5 font-mono uppercase tracking-widest text-white outline-none transition-colors placeholder:text-white/25 focus:border-gold"
+          className="w-full rounded-xl border border-line/20 bg-surface2 px-4 py-3.5 font-mono uppercase tracking-widest text-ink outline-none transition-colors placeholder:text-faint focus:border-gold"
         />
       </div>
 

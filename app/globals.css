@@ -3,6 +3,37 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light theme (default). */
+  :root {
+    --c-canvas: 247 248 252; /* #F7F8FC soft white */
+    --c-surface: 255 255 255; /* card white */
+    --c-surface2: 238 241 249; /* input / raised */
+    --c-line: 18 30 62; /* navy, used at low alpha for borders */
+    --c-ink: 11 22 49; /* #0B1631 navy text */
+    --c-muted: 60 72 106; /* secondary */
+    --c-faint: 108 118 144; /* tertiary */
+
+    --aura: radial-gradient(90% 55% at 50% -8%, rgba(37, 64, 124, 0.1) 0%, rgba(247, 248, 252, 0) 60%),
+      radial-gradient(70% 50% at 50% 108%, rgba(184, 145, 47, 0.12) 0%, rgba(247, 248, 252, 0) 60%);
+    --body-bg: radial-gradient(120% 80% at 50% -10%, rgba(37, 64, 124, 0.07) 0%, rgba(247, 248, 252, 0) 55%);
+  }
+
+  /* Dark theme. */
+  .dark {
+    --c-canvas: 7 12 26; /* midnight */
+    --c-surface: 14 28 65; /* deep */
+    --c-surface2: 20 36 73;
+    --c-line: 234 237 247; /* mist, low alpha for borders */
+    --c-ink: 234 237 247; /* mist text */
+    --c-muted: 185 193 218;
+    --c-faint: 138 147 178;
+
+    --aura: radial-gradient(90% 55% at 50% -8%, rgba(37, 64, 124, 0.35) 0%, rgba(7, 12, 26, 0) 60%),
+      radial-gradient(70% 50% at 50% 108%, rgba(198, 162, 76, 0.12) 0%, rgba(7, 12, 26, 0) 60%);
+    --body-bg: radial-gradient(120% 80% at 50% -10%, rgba(37, 64, 124, 0.22) 0%, rgba(7, 12, 26, 0) 55%),
+      radial-gradient(90% 60% at 100% 100%, rgba(198, 162, 76, 0.06) 0%, rgba(7, 12, 26, 0) 60%);
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
@@ -21,20 +52,17 @@
   }
 
   body {
-    @apply bg-midnight font-body text-mist antialiased;
-    background-image:
-      radial-gradient(120% 80% at 50% -10%, rgba(37, 64, 124, 0.22) 0%, rgba(7, 12, 26, 0) 55%),
-      radial-gradient(90% 60% at 100% 100%, rgba(198, 162, 76, 0.06) 0%, rgba(7, 12, 26, 0) 60%);
+    @apply bg-canvas font-body text-ink antialiased;
+    background-image: var(--body-bg);
     background-attachment: fixed;
   }
 
-  /* Serif display headings read as premium/editorial, not poster-loud. */
   .font-display {
     font-feature-settings: "liga" 1, "kern" 1;
   }
 
   ::selection {
-    @apply bg-gold text-midnight;
+    @apply bg-gold text-white;
   }
 
   :focus-visible {
@@ -42,25 +70,27 @@
   }
 }
 
-@layer utilities {
-  /* Gold gradient text for key display words. */
-  .text-gold-gradient {
-    @apply bg-gradient-to-b from-gold to-ember bg-clip-text text-transparent;
-  }
-
-  /* A thin gold hairline used as a section divider / accent. */
-  .gold-hairline {
-    background: linear-gradient(90deg, rgba(198, 162, 76, 0) 0%, rgba(198, 162, 76, 0.7) 50%, rgba(198, 162, 76, 0) 100%);
-  }
-}
-
 @layer components {
-  /* One shared shell so section padding never fights across files. */
   .shell {
     @apply mx-auto w-full max-w-shell px-6 lg:px-24;
   }
 
   .band {
-    @apply relative border-t border-white/[0.07] py-28 lg:py-36;
+    @apply relative border-t border-line/10 py-28 lg:py-36;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    @apply bg-gradient-to-b from-gold to-ember bg-clip-text text-transparent;
+  }
+
+  .gold-hairline {
+    background: linear-gradient(90deg, rgba(184, 145, 47, 0) 0%, rgba(184, 145, 47, 0.7) 50%, rgba(184, 145, 47, 0) 100%);
+  }
+
+  /* Theme-aware hero lighting. */
+  .hero-aura {
+    background: var(--aura);
   }
 }

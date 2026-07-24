@@ -22,23 +22,23 @@ export default async function ResultPage({ params }: { params: { attemptId: stri
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-2xl px-6 py-16">
-      <Link href="/portal/exams" className="text-xs uppercase tracking-[0.28em] text-white/50 hover:text-gold">
+      <Link href="/portal/exams" className="text-xs uppercase tracking-[0.28em] text-faint hover:text-gold">
         ← All assessments
       </Link>
 
-      <header className="mt-8 rounded-3xl border border-white/10 bg-deep/50 p-8 text-center">
+      <header className="mt-8 rounded-3xl border border-line/15 bg-surface p-8 text-center">
         <p className="text-xs uppercase tracking-[0.28em] text-ember">{result.assessmentTitle}</p>
         <p className="mt-4 font-display text-6xl leading-none">
           {result.score}
-          <span className="text-white/40">/{result.total}</span>
+          <span className="text-faint">/{result.total}</span>
         </p>
-        <p className="mt-3 text-white/55">{pct}% correct</p>
+        <p className="mt-3 text-muted">{pct}% correct</p>
       </header>
 
       <section className="mt-10 space-y-4">
-        <h2 className="text-xs uppercase tracking-[0.28em] text-white/40">Review</h2>
+        <h2 className="text-xs uppercase tracking-[0.28em] text-faint">Review</h2>
         {result.questions.map((q, i) => (
-          <article key={i} className="rounded-2xl border border-white/10 bg-deep/40 p-5">
+          <article key={i} className="rounded-2xl border border-line/15 bg-surface p-5">
             <div className="flex items-start gap-3">
               <span
                 className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-bold ${
@@ -50,7 +50,7 @@ export default async function ResultPage({ params }: { params: { attemptId: stri
               <div className="min-w-0">
                 <p className="font-semibold leading-snug">{q.stem}</p>
                 {q.topic && (
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/35">{q.topic}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-faint">{q.topic}</p>
                 )}
 
                 <ul className="mt-3 space-y-1.5 text-sm">
@@ -65,10 +65,10 @@ export default async function ResultPage({ params }: { params: { attemptId: stri
                             ? "bg-emerald-500/10 text-emerald-200"
                             : isChosen
                               ? "bg-ember/10 text-ember"
-                              : "text-white/55"
+                              : "text-muted"
                         }`}
                       >
-                        <span className="mr-2 font-mono text-xs text-white/40">
+                        <span className="mr-2 font-mono text-xs text-faint">
                           {String.fromCharCode(65 + oi)}
                         </span>
                         {opt}
@@ -80,10 +80,10 @@ export default async function ResultPage({ params }: { params: { attemptId: stri
                 </ul>
 
                 {q.chosen_option === null && (
-                  <p className="mt-2 text-xs text-white/40">Not answered</p>
+                  <p className="mt-2 text-xs text-faint">Not answered</p>
                 )}
                 {q.explanation && (
-                  <p className="mt-3 border-l-2 border-gold/50 pl-3 text-sm text-white/60">
+                  <p className="mt-3 border-l-2 border-gold/50 pl-3 text-sm text-muted">
                     {q.explanation}
                   </p>
                 )}

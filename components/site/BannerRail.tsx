@@ -17,7 +17,7 @@ export function BannerRail({
     >
       <div className={`${tone === "ember" ? "bg-ember" : "bg-stage"} h-full w-[3px]`} />
       <span
-        className="absolute left-[18px] top-10 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.42em] text-white/45"
+        className="absolute left-[18px] top-10 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.42em] text-faint"
         style={{ writingMode: "vertical-rl" }}
       >
         {label}
