@@ -128,6 +128,35 @@ Each assessment page shows:
 
 ---
 
+## Troubleshooting
+
+**"new row violates row-level security policy for table …"** (when creating an
+admin, member, or saving anything).
+
+This is not a code bug — it means the server is writing with the wrong Supabase
+key. Every table has Row Level Security on with no public policies, so only the
+**service_role** key (which bypasses RLS) can write. The error means
+`SUPABASE_SERVICE_ROLE_KEY` holds the **anon / publishable** key, or a
+truncated/mis-pasted service_role key.
+
+Fix:
+
+1. Supabase → **Project Settings → API** → copy the **`service_role`** secret
+   (a long JWT starting `eyJ…`, or the new **secret key** `sb_secret_…`). Do
+   **not** use the `anon` / `publishable` (`sb_publishable_…`) key.
+2. On your host (Vercel → Settings → Environment Variables), set
+   `SUPABASE_SERVICE_ROLE_KEY` to that value — paste the **whole** key, no spaces
+   or newlines.
+3. **Redeploy**, then retry.
+
+Never expose this key to the browser (no `NEXT_PUBLIC_` prefix).
+
+**"Portal is not available right now" / setup returns 503** — `SUPABASE_URL` or
+`SUPABASE_SERVICE_ROLE_KEY` isn't set at all. Add them and redeploy.
+
+**"Setup is disabled…" (403)** — `ADMIN_SETUP_TOKEN` isn't set on the host, or the
+token you typed doesn't match it.
+
 ## 5. Security notes
 
 - Correct answers and explanations are never sent to the exam browser; scoring

@@ -1,6 +1,6 @@
 import "server-only";
 import { randomBytes, scryptSync, timingSafeEqual } from "crypto";
-import { getServiceClient } from "@/lib/supabase";
+import { getServiceClient, describeDbError } from "@/lib/supabase";
 import { hashAccessCode, generateAccessCode } from "@/lib/portal-auth";
 
 /**
@@ -77,7 +77,7 @@ export async function createAdmin(email: string, password: string, role = "admin
     .insert({ email: normalized, password_hash: hashPassword(password), role });
   if (error) {
     if (/duplicate|unique/i.test(error.message)) throw new Error("An admin with that email already exists.");
-    throw new Error(error.message);
+    throw new Error(describeDbError(error));
   }
 }
 
@@ -130,7 +130,7 @@ export async function createMember(
       access_code_hash: hashAccessCode(code),
     });
     if (!error) return { code };
-    if (!/duplicate|unique/i.test(error.message)) throw new Error(error.message);
+    if (!/duplicate|unique/i.test(error.message)) throw new Error(describeDbError(error));
   }
   throw new Error("Could not generate a unique access code. Try again.");
 }

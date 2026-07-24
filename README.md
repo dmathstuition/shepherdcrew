@@ -76,6 +76,10 @@ edit assessments and questions, and see per-topic analytics and results.
 (If you have a terminal, `node scripts/seed-admin.mjs <email> <password>` with the
 Supabase env vars is an alternative way to create an admin.)
 
+> Seeing **"new row violates row-level security policy"**? `SUPABASE_SERVICE_ROLE_KEY`
+> is set to the wrong key — it must be the **service_role** secret (not the
+> anon/publishable key). See the Troubleshooting section in `docs/admin-guide.md`.
+
 ## Before launch — actual blockers
 
 1. **Supabase env vars are unset**, so `/api/join` accepts submissions and drops them (logs only). Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` and run the migration.
