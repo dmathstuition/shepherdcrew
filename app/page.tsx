@@ -1,0 +1,29 @@
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
+import { JoinForm } from "@/components/site/JoinForm";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { MissionVision } from "@/components/sections/MissionVision";
+import { Programs } from "@/components/sections/Programs";
+import { MjfGoals } from "@/components/sections/MjfGoals";
+import { Faith } from "@/components/sections/Faith";
+import { Gallery } from "@/components/sections/Gallery";
+
+export default function HomePage() {
+  return (
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <MissionVision />
+        <Programs />
+        <MjfGoals />
+        <Faith />
+        <Gallery />
+        <JoinForm />
+      </main>
+      <Footer />
+    </>
+  );
+}

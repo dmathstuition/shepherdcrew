@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-midnight font-body text-mist antialiased;
+  }
+
+  ::selection {
+    @apply bg-ember text-midnight;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@layer components {
+  /* One shared shell so section padding never fights across files. */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 lg:px-24;
+  }
+
+  .band {
+    @apply relative border-t border-white/[0.07] py-28 lg:py-36;
+  }
+}

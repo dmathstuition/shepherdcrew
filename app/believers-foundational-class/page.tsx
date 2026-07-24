@@ -1,0 +1,233 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
+import { JoinForm } from "@/components/site/JoinForm";
+import { Reveal } from "@/components/site/Reveal";
+import { BannerRail } from "@/components/site/BannerRail";
+import { Eyebrow } from "@/components/site/Eyebrow";
+import { bfc, programs } from "@/lib/content";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Believers Foundational Class",
+  description: `${bfc.length} of intensive teaching for new and returning believers. Theme: ${bfc.theme}.`,
+};
+
+export default function BfcPage() {
+  return (
+    <>
+      <Nav />
+      <main>
+        {/* ---------------------------------------------------------- */}
+        <section className="relative overflow-hidden pb-24 pt-40 lg:pb-32 lg:pt-48">
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(90% 60% at 20% 0%, rgba(242,106,33,0.20) 0%, rgba(7,11,30,0) 60%), radial-gradient(80% 60% at 90% 20%, rgba(33,72,184,0.28) 0%, rgba(7,11,30,0) 60%)",
+            }}
+          />
+          <div className="relative shell">
+            <Reveal>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/logo-mjf.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-11 w-11 rounded-full object-contain"
+                />
+                <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
+                  {bfc.cohort} &middot; {bfc.length}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <h1 className="mt-8 max-w-[16ch] font-display text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.88]">
+                BELIEVERS
+                <br />
+                FOUNDATIONAL
+                <br />
+                <span className="text-ember">CLASS</span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={180}>
+              <p className="mt-8 max-w-[58ch] text-lg leading-relaxed text-white/65">{bfc.intro}</p>
+            </Reveal>
+
+            <Reveal delay={260}>
+              <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
+                <Stat label="Theme" value={bfc.theme} accent />
+                <Stat label="Sessions" value={bfc.sessions.join(" & ")} />
+                <Stat label="Venue" value={bfc.venue} />
+                <Stat label="Length" value={bfc.length} />
+              </dl>
+            </Reveal>
+
+            <Reveal delay={340}>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="#enrol"
+                  className="rounded-full bg-ember px-9 py-4 text-center font-bold text-midnight transition-transform hover:-translate-y-0.5"
+                >
+                  Enrol in this cohort
+                </Link>
+                <Link
+                  href="/portal"
+                  className="rounded-full border border-white/20 px-9 py-4 text-center font-bold transition-colors hover:border-gold hover:text-gold"
+                >
+                  Enter the class portal
+                </Link>
+              </div>
+              <p className="mt-4 text-sm text-white/40">
+                Already enrolled? Use the access code sent to you when you joined.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------- */}
+        <section className="band">
+          <BannerRail label="Curriculum" />
+          <div className="shell">
+            <Reveal>
+              <Eyebrow>Three weeks</Eyebrow>
+              <h2 className="max-w-[20ch] font-display text-[clamp(2.2rem,5.2vw,4rem)] leading-[0.92]">
+                WHAT WE COVER, IN ORDER
+              </h2>
+              <p className="mt-6 max-w-[60ch] text-white/55">
+                The order matters. Nothing in week three stands without week one underneath it.
+              </p>
+            </Reveal>
+
+            <ol className="mt-14 space-y-6">
+              {bfc.weeks.map((week, i) => (
+                <Reveal key={week.label} delay={i * 90}>
+                  <li className="grid gap-8 rounded-3xl border border-white/10 bg-gradient-to-br from-deep to-night p-9 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+                    <div>
+                      <p className="font-display text-5xl leading-none text-ember/60">
+                        {String(i + 1).padStart(2, "0")}
+                      </p>
+                      <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
+                        {week.label}
+                      </p>
+                      <h3 className="mt-3 font-display text-3xl leading-[1.05] lg:text-4xl">
+                        {week.title}
+                      </h3>
+                    </div>
+                    <ul className="space-y-4 border-t border-white/10 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                      {week.topics.map((topic) => (
+                        <li key={topic} className="flex gap-4 text-[17px] leading-[1.6] text-white/70">
+                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" />
+                          {topic}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+
+            <Reveal delay={300}>
+              <div className="mt-6 rounded-3xl border border-ember/30 bg-ember/[0.07] p-9 lg:p-12">
+                <Eyebrow>Assessment</Eyebrow>
+                <h3 className="font-display text-2xl leading-[1.1] lg:text-3xl">
+                  {bfc.assessment.title}
+                </h3>
+                <p className="mt-5 max-w-[70ch] text-[17px] leading-[1.75] text-white/70">
+                  {bfc.assessment.body}
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------- */}
+        <section className="band">
+          <BannerRail label="Who it&rsquo;s for" tone="stage" />
+          <div className="shell">
+            <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+              <Reveal>
+                <div>
+                  <Eyebrow>Who it&rsquo;s for</Eyebrow>
+                  <h2 className="font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[0.92]">
+                    COME AS YOU
+                    <br />
+                    ARE. LEAVE
+                    <br />
+                    <span className="text-ember">GROUNDED.</span>
+                  </h2>
+                </div>
+              </Reveal>
+
+              <Reveal delay={120}>
+                <ul className="space-y-6">
+                  {[
+                    "You gave your life to Christ recently and want to know what happens next.",
+                    "You have been in church for years but were never taught the foundations.",
+                    "You are back after a season away and want to rebuild properly.",
+                    "You lead others and want a clean framework to disciple them with.",
+                  ].map((line) => (
+                    <li
+                      key={line}
+                      className="border-b border-white/10 pb-6 text-[17px] leading-[1.7] text-white/70 last:border-0"
+                    >
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------------------------------------------------------- */}
+        <section id="enrol" className="band">
+          <div className="shell">
+            <Reveal>
+              <div className="rounded-3xl border border-white/10 p-9 text-center lg:p-14">
+                <Eyebrow>Registration</Eyebrow>
+                <h2 className="font-display text-[clamp(2rem,4.6vw,3.4rem)] leading-[0.94]">
+                  TALK TO THE TEAM
+                </h2>
+                <p className="mx-auto mt-6 max-w-[52ch] text-white/60">
+                  Send your details below, or reach either coordinator directly.
+                </p>
+                <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                  {site.contacts.map((c) => (
+                    <a
+                      key={c.phone}
+                      href={`tel:${c.phone}`}
+                      className="rounded-full border border-white/20 px-7 py-3 font-bold transition-colors hover:border-gold hover:text-gold"
+                    >
+                      {c.name} &middot; {c.phone}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <JoinForm defaultProgram={programs[1]} />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function Stat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <div className={`p-7 ${accent ? "bg-ember/10" : "bg-midnight"}`}>
+      <dt className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/40">{label}</dt>
+      <dd className={`mt-3 font-display text-xl leading-tight ${accent ? "text-gold" : "text-white"}`}>
+        {value}
+      </dd>
+    </div>
+  );
+}
