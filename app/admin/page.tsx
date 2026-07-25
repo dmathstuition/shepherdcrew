@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { currentAdmin } from "@/lib/current-admin";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
+import { StatTile } from "@/components/portal/StatTile";
 import { listCohorts, listMembers, listAssessments, listAdmins } from "@/lib/admin";
 import {
   CreateCohortForm,
@@ -43,15 +46,35 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
   return (
     <main className="mx-auto min-h-screen w-full max-w-4xl px-6 py-14">
       <header className="flex items-center justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-gold">Class portal</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold leading-none">Admin</h1>
+        <div className="flex items-center gap-4">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+            <Image
+              src="/logo-shepherds-crew.png"
+              alt="The Shepherd's Crew"
+              width={48}
+              height={48}
+              className="h-[86%] w-[86%] object-contain"
+              priority
+            />
+          </span>
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-gold">Class portal</p>
+            <h1 className="mt-1 font-display text-3xl font-semibold leading-none">Admin</h1>
+          </div>
         </div>
-        <div className="flex items-center gap-5">
-          <span className="hidden text-sm text-faint sm:block">{admin.email}</span>
+        <div className="flex items-center gap-4">
+          <span className="hidden text-sm text-faint md:block">{admin.email}</span>
+          <ThemeToggle />
           <LogoutButton />
         </div>
       </header>
+
+      {/* Overview */}
+      <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4">
+        <StatTile label="Cohorts" value={cohorts.length} />
+        <StatTile label="Members" value={members.length} sub={selectedId ? "in this cohort" : undefined} />
+        <StatTile label="Assessments" value={assessments.length} sub={selectedId ? "in this cohort" : undefined} />
+      </div>
 
       {/* Cohorts */}
       <section className={`${card} mt-10`}>
