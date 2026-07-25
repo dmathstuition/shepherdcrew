@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function PortalPage() {
+export default async function PortalPage({ searchParams }: { searchParams: { ended?: string } }) {
   // Already signed in? Skip the login screen.
   let signedIn = false;
   try {
@@ -20,9 +20,16 @@ export default async function PortalPage() {
   }
   if (signedIn) redirect("/portal/exams");
 
+  const endedByProctor = searchParams?.ended === "proctor";
+
   return (
     <main className="flex min-h-screen items-center justify-center px-6 py-24">
       <div className="w-full max-w-md">
+        {endedByProctor && (
+          <p className="mb-8 rounded-2xl border border-ember/40 bg-ember/10 px-5 py-4 text-center text-sm text-ember">
+            Your exam was ended and submitted because you left the exam screen too many times.
+          </p>
+        )}
         <div className="text-center">
           <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white ring-1 ring-gold/30">
             <Image

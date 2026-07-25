@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { currentMember } from "@/lib/current-member";
 import { listAssessmentsForMember } from "@/lib/portal";
@@ -21,13 +22,25 @@ export default async function ExamsPage() {
   return (
     <main className="mx-auto min-h-screen w-full max-w-2xl px-6 py-20">
       <header className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-ember">Class portal</p>
-          <h1 className="mt-2 font-display text-4xl leading-none">
-            HELLO,
-            <br />
-            {member.full_name.split(" ")[0].toUpperCase()}
-          </h1>
+        <div className="flex items-center gap-4">
+          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-white ring-1 ring-gold/30">
+            <Image
+              src="/logo-shepherds-crew.png"
+              alt="The Shepherd's Crew"
+              width={56}
+              height={56}
+              className="h-[86%] w-[86%] object-contain"
+              priority
+            />
+          </span>
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-ember">Class portal</p>
+            <h1 className="mt-1 font-display text-4xl leading-none">
+              HELLO,
+              <br />
+              {member.full_name.split(" ")[0].toUpperCase()}
+            </h1>
+          </div>
         </div>
         <LogoutButton />
       </header>
