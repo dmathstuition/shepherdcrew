@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { currentMember } from "@/lib/current-member";
-import { getResult } from "@/lib/portal";
+import { getResult, getCohortName, PASS_PCT } from "@/lib/portal";
+import { PortalTopBar } from "@/components/portal/PortalTopBar";
+import { ScoreGauge } from "@/components/portal/ScoreGauge";
+import { ReviewList } from "@/components/portal/ReviewList";
 
 export const metadata: Metadata = {
   title: "Result",
@@ -15,83 +17,71 @@ export default async function ResultPage({ params }: { params: { attemptId: stri
   const member = await currentMember();
   if (!member) redirect("/portal");
 
-  const result = await getResult(member, params.attemptId);
+  const [result, cohortName] = await Promise.all([
+    getResult(member, params.attemptId),
+    getCohortName(member.cohort_id),
+  ]);
   if (!result) redirect("/portal/exams");
 
-  const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+  // Per-topic breakdown.
+  const topics = new Map<string, { correct: number; total: number }>();
+  for (const q of result.questions) {
+    const key = q.topic || "General";
+    const cur = topics.get(key) ?? { correct: 0, total: 0 };
+    cur.total += 1;
+    if (q.is_correct) cur.correct += 1;
+    topics.set(key, cur);
+  }
+  const topicStats = Array.from(topics.entries())
+    .map(([topic, { correct, total }]) => ({ topic, correct, total, pct: Math.round((correct / total) * 100) }))
+    .sort((a, b) => a.pct - b.pct);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-2xl px-6 py-16">
-      <Link href="/portal/exams" className="text-xs uppercase tracking-[0.28em] text-faint hover:text-gold">
-        ← All assessments
-      </Link>
+    <>
+      <PortalTopBar cohortName={cohortName} />
+      <main className="mx-auto min-h-screen w-full max-w-3xl px-6 pb-24 pt-8">
+        <a href="/portal/exams" className="text-xs uppercase tracking-[0.28em] text-faint hover:text-gold">
+          ← All assessments
+        </a>
 
-      <header className="mt-8 rounded-3xl border border-line/15 bg-surface p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.28em] text-ember">{result.assessmentTitle}</p>
-        <p className="mt-4 font-display text-6xl leading-none">
-          {result.score}
-          <span className="text-faint">/{result.total}</span>
-        </p>
-        <p className="mt-3 text-muted">{pct}% correct</p>
-      </header>
+        <div className="mt-6 grid items-center gap-8 rounded-3xl border border-line/15 bg-surface p-8 sm:grid-cols-[1fr_auto] sm:p-10">
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-ember">{result.assessmentTitle}</p>
+            <h1 className="mt-3 font-display text-3xl font-semibold leading-tight">Your result</h1>
+            <p className="mt-3 max-w-[42ch] text-muted">
+              {result.score} of {result.total} correct. The pass mark is {PASS_PCT}%. Review every question below.
+            </p>
+          </div>
+          <ScoreGauge score={result.score} total={result.total} passPct={PASS_PCT} />
+        </div>
 
-      <section className="mt-10 space-y-4">
-        <h2 className="text-xs uppercase tracking-[0.28em] text-faint">Review</h2>
-        {result.questions.map((q, i) => (
-          <article key={i} className="rounded-2xl border border-line/15 bg-surface p-5">
-            <div className="flex items-start gap-3">
-              <span
-                className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs font-bold ${
-                  q.is_correct ? "bg-emerald-500/20 text-emerald-300" : "bg-ember/20 text-ember"
-                }`}
-              >
-                {q.is_correct ? "✓" : "✕"}
-              </span>
-              <div className="min-w-0">
-                <p className="font-semibold leading-snug">{q.stem}</p>
-                {q.topic && (
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-faint">{q.topic}</p>
-                )}
-
-                <ul className="mt-3 space-y-1.5 text-sm">
-                  {q.options.map((opt, oi) => {
-                    const isCorrect = oi === q.correct_option;
-                    const isChosen = oi === q.chosen_option;
-                    return (
-                      <li
-                        key={oi}
-                        className={`rounded-lg px-3 py-2 ${
-                          isCorrect
-                            ? "bg-emerald-500/10 text-emerald-200"
-                            : isChosen
-                              ? "bg-ember/10 text-ember"
-                              : "text-muted"
-                        }`}
-                      >
-                        <span className="mr-2 font-mono text-xs text-faint">
-                          {String.fromCharCode(65 + oi)}
-                        </span>
-                        {opt}
-                        {isCorrect && <span className="ml-2 text-xs">correct</span>}
-                        {isChosen && !isCorrect && <span className="ml-2 text-xs">your answer</span>}
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                {q.chosen_option === null && (
-                  <p className="mt-2 text-xs text-faint">Not answered</p>
-                )}
-                {q.explanation && (
-                  <p className="mt-3 border-l-2 border-gold/50 pl-3 text-sm text-muted">
-                    {q.explanation}
-                  </p>
-                )}
-              </div>
+        {/* Per-topic breakdown */}
+        {topicStats.length > 0 && (
+          <section className="mt-8 rounded-3xl border border-line/15 bg-surface p-6 sm:p-8">
+            <h2 className="text-xs uppercase tracking-[0.28em] text-faint">By topic</h2>
+            <div className="mt-6 space-y-4">
+              {topicStats.map((t) => (
+                <div key={t.topic}>
+                  <div className="mb-1 flex justify-between text-sm">
+                    <span className="text-ink">{t.topic}</span>
+                    <span className="text-faint">
+                      {t.pct}% · {t.correct}/{t.total}
+                    </span>
+                  </div>
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-ink/10">
+                    <div
+                      className={`h-full rounded-full ${t.pct < PASS_PCT ? "bg-ember" : "bg-emerald-500/70"}`}
+                      style={{ width: `${t.pct}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-          </article>
-        ))}
-      </section>
-    </main>
+          </section>
+        )}
+
+        <ReviewList questions={result.questions} />
+      </main>
+    </>
   );
 }

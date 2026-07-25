@@ -105,10 +105,19 @@ export async function getMemberById(id: string): Promise<Member | null> {
 // Assessments
 // ---------------------------------------------------------------------------
 
+/** Pass mark, as a percentage. Configurable here. */
+export const PASS_PCT = 50;
+
 export type AssessmentListItem = Assessment & {
   attempt: Pick<Attempt, "id" | "submitted_at" | "score" | "total"> | null;
   open: boolean;
+  question_count: number;
 };
+
+export async function getCohortName(cohortId: string): Promise<string | null> {
+  const { data } = await db().from("cohorts").select("name").eq("id", cohortId).maybeSingle();
+  return (data as { name: string } | null)?.name ?? null;
+}
 
 export async function listAssessmentsForMember(member: Member): Promise<AssessmentListItem[]> {
   const [{ data: assessments }, { data: attempts }] = await Promise.all([
@@ -124,10 +133,25 @@ export async function listAssessmentsForMember(member: Member): Promise<Assessme
       .eq("member_id", member.id),
   ]);
 
+  const list = (assessments ?? []) as Assessment[];
+
+  // Question counts for the visible assessments (one query).
+  const counts = new Map<string, number>();
+  if (list.length > 0) {
+    const { data: qrows } = await db()
+      .from("questions")
+      .select("assessment_id")
+      .in("assessment_id", list.map((a) => a.id));
+    for (const r of (qrows ?? []) as { assessment_id: string }[]) {
+      counts.set(r.assessment_id, (counts.get(r.assessment_id) ?? 0) + 1);
+    }
+  }
+
   const byAssessment = new Map((attempts ?? []).map((a: any) => [a.assessment_id, a]));
-  return ((assessments ?? []) as Assessment[]).map((a) => ({
+  return list.map((a) => ({
     ...a,
     open: isOpen(a),
+    question_count: counts.get(a.id) ?? 0,
     attempt: byAssessment.get(a.id)
       ? {
           id: byAssessment.get(a.id).id,
