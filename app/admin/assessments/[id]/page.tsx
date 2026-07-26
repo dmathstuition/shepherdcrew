@@ -123,9 +123,17 @@ export default async function AssessmentAdmin({ params }: { params: { id: string
 
       {/* Results */}
       <section className={`${card} mt-6`}>
-        <div className="flex items-baseline justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className={h2}>Results</h2>
-          {avg != null && <p className="text-sm text-faint">Cohort average: {avg}%</p>}
+          <div className="flex items-center gap-3">
+            {avg != null && <p className="text-sm text-faint">Cohort average: {avg}%</p>}
+            <a
+              href={`/api/admin/assessments/${assessment.id}/report`}
+              className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/[0.08] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold transition-colors hover:bg-gold/15"
+            >
+              ↓ Download PDF
+            </a>
+          </div>
         </div>
         <div className="mt-6 overflow-x-auto">
           <table className="w-full text-left text-sm">
