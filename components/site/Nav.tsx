@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/site/ThemeToggle";
 const links = [
   { href: "/#about", label: "About" },
   { href: "/#programs", label: "Programs" },
+  { href: "/aowap", label: "AOWAP 2026" },
   { href: "/believers-foundational-class", label: "Foundational class" },
   { href: "/#testimonies", label: "Testimonies" },
   { href: "/#beliefs", label: "Beliefs" },

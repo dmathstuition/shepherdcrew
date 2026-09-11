@@ -1,6 +1,7 @@
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { JoinForm } from "@/components/site/JoinForm";
+import { AowapPopup } from "@/components/site/AowapPopup";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { MissionVision } from "@/components/sections/MissionVision";
@@ -14,6 +15,7 @@ import { Testimonies } from "@/components/sections/Testimonies";
 export default function HomePage() {
   return (
     <>
+      <AowapPopup />
       <Nav />
       <main>
         <Hero />
