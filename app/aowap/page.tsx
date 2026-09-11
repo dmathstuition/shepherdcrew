@@ -42,8 +42,8 @@ export default function AowapRegisterPage() {
                 <p className="mt-6 text-lg leading-[1.7] text-muted">
                   Welcome to the Atmosphere of Worship and Praise 2026! This prophetic meeting holds{" "}
                   <span className="font-semibold text-ink">20th November 2026</span> at{" "}
-                  <span className="font-semibold text-ink">Epe, Lagos State</span> by{" "}
-                  <span className="font-semibold text-ink">8:00 PM</span>.
+                  <span className="font-semibold text-ink">Epe, Lagos State</span>, with the{" "}
+                  <span className="font-semibold text-ink">red carpet from 8:00 PM</span>.
                 </p>
                 <p className="mt-4 text-lg leading-[1.7] text-muted">
                   Fill in your details below to register. We can&rsquo;t wait to have you be a part
@@ -55,6 +55,9 @@ export default function AowapRegisterPage() {
                   </span>
                   <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
                     Epe, Lagos
+                  </span>
+                  <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
+                    Red carpet 8:00 PM
                   </span>
                   <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
                     Worship · Revival · Praise

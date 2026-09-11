@@ -117,7 +117,7 @@ function sendConfirmation(data) {
     "We can't wait to have you be a part of this prophetic encounter!</p>" +
     '<table style="margin:18px 0;border-collapse:collapse">' +
     row("Date", CONFIG.EVENT_DATE) +
-    row("Time", CONFIG.EVENT_TIME) +
+    row("Red carpet", CONFIG.EVENT_TIME) +
     row("Venue", CONFIG.EVENT_VENUE) +
     "</table>" +
     "<p>Come expectant. Come thirsty. Come ready to worship.</p>" +
