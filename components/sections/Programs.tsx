@@ -60,10 +60,10 @@ export function Programs() {
                   intimacy with God.
                 </p>
                 <Link
-                  href="/#join"
+                  href="/aowap"
                   className="mt-8 inline-flex items-center gap-2 font-bold text-ember transition-colors hover:text-gold"
                 >
-                  Be there for the next edition <span aria-hidden>&rarr;</span>
+                  Register for AOWAP 2026 <span aria-hidden>&rarr;</span>
                 </Link>
               </div>
             </div>
