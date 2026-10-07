@@ -37,10 +37,10 @@ coding.
 var CONFIG = {
   SHEET_NAME: "Registrations",
   ADMIN_EMAIL: "dmathstuition@gmail.com", // set "" to disable admin copies
-  EVENT_NAME: "AOWAP 2026",
+  EVENT_NAME: "AOWAP 2026 — The Sound of Revival",
   EVENT_DATE: "20th November 2026",
-  EVENT_VENUE: "Epe, Lagos State",
-  EVENT_TIME: "8:00 PM",
+  EVENT_VENUE: "PAYM Event Centre, opposite LASUED, Epe, Lagos State",
+  EVENT_TIME: "9:00 PM prompt",
 };
 
 var HEADERS = [
@@ -117,7 +117,7 @@ function sendConfirmation(data) {
     "We can't wait to have you be a part of this prophetic encounter!</p>" +
     '<table style="margin:18px 0;border-collapse:collapse">' +
     row("Date", CONFIG.EVENT_DATE) +
-    row("Red carpet", CONFIG.EVENT_TIME) +
+    row("Time", CONFIG.EVENT_TIME) +
     row("Venue", CONFIG.EVENT_VENUE) +
     "</table>" +
     "<p>Come expectant. Come thirsty. Come ready to worship.</p>" +
