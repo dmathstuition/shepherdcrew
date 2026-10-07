@@ -81,9 +81,9 @@ export function AowapPopup() {
         <Link href="/aowap" onClick={close} className="block">
           <Image
             src="/flyers/aowap-2026.jpg"
-            alt="Atmosphere of Worship and Praise 2026 — 20th November 2026, Epe, Lagos"
-            width={2048}
-            height={2560}
+            alt="AOWAP 2026 — The Sound of Revival. 20th November 2026, PAYM Event Centre, Epe, Lagos"
+            width={1024}
+            height={1280}
             priority
             className="h-auto w-full"
           />

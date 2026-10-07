@@ -9,7 +9,7 @@ import { RegisterForm } from "./RegisterForm";
 export const metadata: Metadata = {
   title: "AOWAP 2026 — Register",
   description:
-    "Register for the Atmosphere of Worship & Praise 2026 — a prophetic worship encounter holding 20th November 2026 at Epe, Lagos.",
+    "Register for the Atmosphere of Worship & Praise 2026 — The Sound of Revival. A prophetic worship encounter holding 20th November 2026 at PAYM Event Centre, Epe, Lagos.",
 };
 
 export default function AowapRegisterPage() {
@@ -25,9 +25,9 @@ export default function AowapRegisterPage() {
                 <div className="mx-auto max-w-[360px] overflow-hidden rounded-3xl ring-1 ring-gold/25 lg:mx-0">
                   <Image
                     src="/flyers/aowap-2026.jpg"
-                    alt="Atmosphere of Worship and Praise 2026 flyer"
-                    width={2048}
-                    height={2560}
+                    alt="AOWAP 2026 — The Sound of Revival flyer"
+                    width={1024}
+                    height={1280}
                     priority
                     className="h-auto w-full"
                   />
@@ -39,11 +39,15 @@ export default function AowapRegisterPage() {
                 <h1 className="mt-3 font-display text-[clamp(2.6rem,6vw,5rem)] leading-[0.9]">
                   AOWAP 2026
                 </h1>
+                <p className="mt-4 font-display text-2xl italic text-gold">The Sound of Revival</p>
                 <p className="mt-6 text-lg leading-[1.7] text-muted">
                   Welcome to the Atmosphere of Worship and Praise 2026! This prophetic meeting holds{" "}
-                  <span className="font-semibold text-ink">20th November 2026</span> at{" "}
-                  <span className="font-semibold text-ink">Epe, Lagos State</span>, with the{" "}
-                  <span className="font-semibold text-ink">red carpet from 8:00 PM</span>.
+                  <span className="font-semibold text-ink">20th November 2026</span>,{" "}
+                  <span className="font-semibold text-ink">9:00 PM prompt</span>, at{" "}
+                  <span className="font-semibold text-ink">
+                    PAYM Event Centre, opposite LASUED, Epe, Lagos State
+                  </span>
+                  .
                 </p>
                 <p className="mt-4 text-lg leading-[1.7] text-muted">
                   Fill in your details below to register. We can&rsquo;t wait to have you be a part
@@ -54,10 +58,10 @@ export default function AowapRegisterPage() {
                     20 Nov 2026
                   </span>
                   <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
-                    Epe, Lagos
+                    9:00 PM prompt
                   </span>
                   <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
-                    Red carpet 8:00 PM
+                    PAYM Event Centre, Epe
                   </span>
                   <span className="rounded-full border border-line/20 bg-surface2 px-4 py-2 font-medium text-muted">
                     Worship · Revival · Praise

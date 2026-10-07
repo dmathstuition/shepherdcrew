@@ -51,9 +51,10 @@ export function RegisterForm() {
         </span>
         <h2 className="mt-6 font-display text-3xl font-semibold">You&rsquo;re registered!</h2>
         <p className="mx-auto mt-4 max-w-[46ch] text-muted">
-          Thank you for registering for AOWAP 2026. A confirmation email is on its way to your
-          inbox — do check your spam folder if you don&rsquo;t see it shortly. We can&rsquo;t wait to
-          worship with you on <span className="font-semibold text-ink">20th November 2026</span> in
+          Thank you for registering for AOWAP 2026 — The Sound of Revival. A confirmation email is
+          on its way to your inbox — do check your spam folder if you don&rsquo;t see it shortly. We
+          can&rsquo;t wait to worship with you on{" "}
+          <span className="font-semibold text-ink">20th November 2026</span> at PAYM Event Centre,
           Epe, Lagos.
         </p>
       </div>
